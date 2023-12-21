@@ -27,6 +27,10 @@
             <a href="{{ route('item.create') }}">
               <button type="button" class="btn btn-success mb-3">Add Item</button>
             </a>
+
+            <a href="{{ route('item.export') }}">
+              <button type="button" class="btn btn-primary mb-3">Export Excel</button>
+            </a>
   
             <!-- Table with stripped rows -->
             <table class="table datatable">

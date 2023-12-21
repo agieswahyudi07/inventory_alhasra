@@ -9,6 +9,8 @@ use App\Models\RoomModel;
 use App\Models\CategoryModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Exports\ItemExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -376,6 +378,11 @@ class ItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
+     public function export() 
+    {
+        return Excel::download(new ItemExport, 'item.xlsx');
+    }
 
     public function item_destroy($id)
     {

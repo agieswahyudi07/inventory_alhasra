@@ -6,6 +6,7 @@ use App\Http\Controllers\Item;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\InstitutionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,7 @@ Route::get('/item/create', [ItemController::class, 'item_create'])->name('item.c
 Route::post('/item/store', [ItemController::class, 'item_store'])->name('item.store');
 Route::get('/item/edit/{id}', [ItemController::class, 'item_edit'])->name('item.edit');
 Route::put('/item/update/{id}', [ItemController::class, 'item_update'])->name('item.update');
+Route::get('item/export/', [ItemController::class, 'export'])->name('item.export');
 Route::delete('/item/destroy/{id}', [ItemController::class, 'item_destroy'])->name('item.destroy');
 
 // Route Institution

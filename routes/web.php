@@ -44,6 +44,7 @@ Route::delete('/institution/destroy/{id}', [InstitutionController::class, 'insti
 Route::get('/room', [RoomController::class, 'room_index'])->name('room.index');
 Route::get('/room/edit/{id}', [RoomController::class, 'room_edit'])->name('room.edit');
 Route::put('/room/update/{id}', [RoomController::class, 'room_update'])->name('room.update');
+Route::get('item/export/', [RoomController::class, 'export'])->name('room.export');
 Route::delete('/room/destroy/{id}', [RoomController::class, 'room_destroy'])->name('room.destroy');
 
 // Route Category

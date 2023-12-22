@@ -35,6 +35,10 @@
               <button type="button" class="btn btn-danger mb-3">Add Facilities</i></button>
             </a>
             
+            <a href="{{ route('room.export') }}">
+              <button type="button" class="btn btn-primary mb-3">Export Excel</i></button>
+            </a>
+            
             <!-- Table with stripped rows -->
             <table class="table datatable">
               <thead>

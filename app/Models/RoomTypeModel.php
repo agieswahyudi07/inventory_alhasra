@@ -24,4 +24,7 @@ class RoomTypeModel extends Model
         'cretime',
         'modtime',
     ];
+
+    protected $primaryKey = 'room_type_id';
+
 }

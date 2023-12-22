@@ -42,4 +42,14 @@ class RoomModel extends Model
         $result = $this->where('room_id', $id)->get();
         return $result;
     }
+
+    public function institution()
+    {
+        return $this->belongsTo(InstitutionModel::class, 'institution_id');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(RoomTypeModel::class, 'room_type_id');
+    }
 }

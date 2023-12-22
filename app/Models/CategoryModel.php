@@ -24,6 +24,8 @@ class CategoryModel extends Model
         'cretime',
         'modtime',
     ];
+    protected $primaryKey = 'category_id';
+
 
     public function get_data($id)
     {

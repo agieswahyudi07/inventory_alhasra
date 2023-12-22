@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\ItemModel;
-use App\Models\InstitutionModel;
-use App\Models\RoomTypeModel;
 use App\Models\RoomModel;
+use App\Exports\RoomExport;
+use Illuminate\Http\Request;
 use App\Models\CategoryModel;
+use App\Models\RoomTypeModel;
+use App\Models\InstitutionModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -429,6 +432,21 @@ class RoomController extends Controller
         $room->update($data);
         Session::flash('success', 'Data successfully updated.');
         return redirect()->route('room.index');
+    }
+
+    public function export() 
+    {
+        $columns = [
+            'ms_room.*', // Pilih semua kolom dari ms_item
+            'ms_institution.institution_name',
+        ];
+        
+        $data = RoomModel::select($columns)
+            ->join('ms_institution', 'ms_institution.institution_id', '=', 'ms_room.institution_id')
+            ->join('tr_room_type', 'tr_room_type.room_type_id', '=', 'ms_room.room_type_id')
+            ->get();
+
+        return Excel::download(new RoomExport($data), 'room-'.Carbon::now()->timestamp.'.xlsx');
     }
 
     /**

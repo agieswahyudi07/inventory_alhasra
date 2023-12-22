@@ -10,6 +10,7 @@ use App\Models\CategoryModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Exports\ItemExport;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
 
@@ -379,10 +380,26 @@ class ItemController extends Controller
      * Remove the specified resource from storage.
      */
 
-     public function export() 
-    {
-        return Excel::download(new ItemExport, 'item.xlsx');
-    }
+     public function export()
+{
+    // Logika untuk mengambil data dengan join
+    $columns = [
+        'ms_item.*', // Pilih semua kolom dari ms_item
+        'ms_institution.institution_name',
+        'ms_room.room_name',
+        'ms_category.category_name',
+    ];
+    
+    $data = ItemModel::select($columns)
+        ->join('ms_institution', 'ms_institution.institution_id', '=', 'ms_item.institution_id')
+        ->join('ms_room', 'ms_room.room_id', '=', 'ms_item.room_id')
+        ->join('ms_category', 'ms_category.category_id', '=', 'ms_item.category_id')
+        ->get();
+
+    return Excel::download(new ItemExport($data), 'item-'.Carbon::now()->timestamp.'.xlsx');
+}
+
+   
 
     public function item_destroy($id)
     {

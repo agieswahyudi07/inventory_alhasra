@@ -36,4 +36,19 @@ class ItemModel extends Model
     ];
 
     protected $primaryKey = 'item_id';
+
+    public function institution()
+    {
+        return $this->belongsTo(InstitutionModel::class, 'institution_id');
+    }
+
+    public function room()
+    {
+        return $this->belongsTo(RoomModel::class, 'room_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(CategoryModel::class, 'category_id');
+    }
 }

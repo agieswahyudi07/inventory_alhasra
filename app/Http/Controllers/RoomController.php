@@ -462,7 +462,6 @@ class RoomController extends Controller
 
     public function getRoomsByInstitution($institutionId)
     {
-        // Ambil data Room berdasarkan Institution menggunakan $institutionId
         $rooms = RoomModel::where('institution_id', $institutionId)->get();
         // dd($rooms);
 

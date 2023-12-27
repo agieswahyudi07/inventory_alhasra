@@ -64,6 +64,11 @@ class ItemController extends Controller
             ->where('room_id', $id)
             ->orderBy('item_id', 'desc')
             ->get();
+
+        $total_item = count($items);
+        $total_price = $items->sum('item_price');
+        $total_price_formated = "Rp " . number_format($total_price, 0, ',', '.');
+
         foreach ($items as $item) {
 
             $institution = DB::table('ms_institution')->select('institution_name')->where('institution_id', $item->institution_id)->first();
@@ -79,7 +84,9 @@ class ItemController extends Controller
         $data = [
 
             'title' => $title,
-            'items' => $items
+            'items' => $items,
+            'total_item' => $total_item,
+            'total_price' => $total_price_formated
         ];
 
         // dd($items);

@@ -23,7 +23,7 @@
             @include('message/errors')
             <p></p>
             <a href="{{ route('category.create') }}">
-              <button type="button" class="btn btn-success mb-3">Add Category</button>
+              <button type="button" class="btn btn-success mb-3"><i class="bi bi-plus-circle"></i> Add Category</button>
             </a>
 
             <!-- Table with stripped rows -->
@@ -44,12 +44,12 @@
                   <td>{{ $category->category_name }}</td>
                   <td>{{ $category->category_code }}</td>  
                   <td>
-                    <a href="{{ route('category.edit', $category->category_id) }}" > <button type="button" class="btn btn-primary mb-3"><i class="bi bi-pencil-square"></i></button></a>
+                    <a href="{{ route('category.edit', $category->category_id) }}" > <button type="button" class="btn btn-primary mb-3"><i class="bi bi-pencil-square"></i> Edit</button></a>
                     <form style="display: inline" method="POST" action="{{ route('category.destroy', $category->category_id) }}">
                       @csrf
                       @method('DELETE')
                       <button type="button" class="btn btn-xs btn-danger mb-3 btn-flat show-alert-delete-box">
-                          <i class="bi bi-trash"></i>
+                          <i class="bi bi-trash"> Delete</i>
                       </button>
                   </form>
 

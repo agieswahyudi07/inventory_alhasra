@@ -18,24 +18,21 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">{{ $data['title'] }}</h5>
-  
-            @include('message/errors')
-  
-            <p></p>
-  
+            <h5 class="card-title">Datatables</h5>
             <a href="{{ route('item.create') }}">
               <button type="button" class="btn btn-success mb-3">Add Item</button>
             </a>
 
-            <a href="{{ route('item.export') }}">
+            <a href="{{ route('item.export') }}"> 
               <button type="button" class="btn btn-primary mb-3">Export Excel</button>
             </a>
   
+        
             <!-- Table with stripped rows -->
             <table class="table datatable">
               <thead>
                 <tr>
+                  <th scope="col">No</th>
                   <th scope="col">Item Code</th>
                   <th scope="col">Item Name</th>
                   <th scope="col">Item Brand</th>
@@ -49,8 +46,9 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($data['items'] as $item)
+                @foreach ($data['items'] as $index => $item)
                   <tr>
+                    <th scope="row">{{ $index + 1 }}</th>
                     <td>{{ $item->item_code }}</td>
                     <td>{{ $item->item_name }}</td>
                     <td>{{ $item->item_brand }}</td>
@@ -61,11 +59,11 @@
                     <td>{{ $item->category_name }}</td>
                     <td>{{ $item->purchase_date }}</td>
                     <td>
-                      <a href="{{ route('item.edit',$item->item_id) }}">
+                      <a href="{{ route('item.edit', $item->item_id) }}">
                         <button type="button" class="btn btn-primary mb-3"><i class="bi bi-pencil-square"></i></button>
                       </a>
   
-                      <form style="display: inline" method="POST" action="{{ route('item.destroy',$item->item_id) }}">
+                      <form style="display: inline" method="POST" action="{{ route('item.destroy', $item->item_id) }}">
                         @csrf
                         @method('delete')
                         <button type="button" class="btn btn-xs btn-danger mb-3 btn-flat show-alert-delete-box">
@@ -83,6 +81,7 @@
       </div>
     </div>
   </section>
+  
   
 </main><!-- End #main -->
 

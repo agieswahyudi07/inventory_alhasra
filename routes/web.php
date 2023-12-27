@@ -25,6 +25,8 @@ Route::get('/', [DashboardController::class, 'dashboard_index'])->name('dashboar
 
 // Route Item Room Index
 Route::get('/room/{room_id}', [ItemController::class, 'item_room_index'])->name('item.room.index');
+Route::get('/room/item/export/{room_id}', [ItemController::class, 'item_room_export'])->name('item_room.export');
+
 
 // Route Item
 Route::get('/item', [ItemController::class, 'item_index'])->name('item.index');
@@ -44,7 +46,7 @@ Route::delete('/institution/destroy/{id}', [InstitutionController::class, 'insti
 Route::get('/room', [RoomController::class, 'room_index'])->name('room.index');
 Route::get('/room/edit/{id}', [RoomController::class, 'room_edit'])->name('room.edit');
 Route::put('/room/update/{id}', [RoomController::class, 'room_update'])->name('room.update');
-Route::get('item/export/', [RoomController::class, 'export'])->name('room.export');
+Route::get('room/export/', [RoomController::class, 'export'])->name('room.export');
 Route::delete('/room/destroy/{id}', [RoomController::class, 'room_destroy'])->name('room.destroy');
 
 // Route Category

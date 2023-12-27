@@ -29,12 +29,20 @@
             @endforeach
             @include('message/errors')
             <p></p>
-         
+            <p></p>
+
+            @foreach ($data['items'] as $item)
+              <a href="{{ route('item_room.export', ['room_id' => $item->room_id]) }}">
+            @endforeach
+                <button type="button" class="btn btn-success mb-3">Excel Export</button>
+              </a>
+           
             
             <!-- Table with stripped rows -->
             <table class="table datatable">
               <thead>
                 <tr>
+                  <th scope="col">No</th>
                   <th scope="col">Item Code</th>
                   <th scope="col">Item Name</th>
                   <th scope="col">Item Brand</th>
@@ -51,6 +59,7 @@
                 @foreach ($data['items'] as $item)
 
                 <tr>
+                  <td>{{ $loop->iteration }}</td>
                   <td>{{ $item->item_code }}</td>
                   <td>{{ $item->item_name }}</td>
                   <td>{{ $item->item_brand }}</td>

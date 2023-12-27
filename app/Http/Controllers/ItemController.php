@@ -82,6 +82,7 @@ class ItemController extends Controller
             'items' => $items
         ];
 
+        // dd($items);
         return view('item.room.index', compact('data'));
     }
 
@@ -399,7 +400,26 @@ class ItemController extends Controller
     return Excel::download(new ItemExport($data), 'item-'.Carbon::now()->timestamp.'.xlsx');
 }
 
-   
+public function item_room_export($room_id)
+{
+
+    $roomName = RoomModel::where('room_id', $room_id)->value('room_name');
+
+    $data = ItemModel::select([
+            'ms_item.*',
+            'ms_institution.institution_name AS institution_name',
+            'ms_room.room_name AS room_name',
+            'ms_category.category_name AS category_name',
+        ])
+        ->join('ms_institution', 'ms_institution.institution_id', '=', 'ms_item.institution_id')
+        ->join('ms_room', 'ms_room.room_id', '=', 'ms_item.room_id')
+        ->join('ms_category', 'ms_category.category_id', '=', 'ms_item.category_id')
+        ->where('ms_item.room_id', '=', $room_id)
+        ->get();
+
+    return Excel::download(new ItemExport($data), 'Item-' . $roomName . '-' . Carbon::now()->timestamp . '.xlsx');
+}
+
 
     public function item_destroy($id)
     {

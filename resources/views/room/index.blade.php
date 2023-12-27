@@ -24,19 +24,20 @@
             @include('message/errors')
             <p></p>
             <a href="{{ route('office.create') }}">
-              <button type="button" class="btn btn-success mb-3">Add Office</i></button>
+              <button type="button" class="btn btn-success mb-3"><i class="bi bi-plus-circle"></i> Add Office</i></button>
             </a>
 
             <a href="{{ route('class.create') }}">
-              <button type="button" class="btn btn-warning mb-3">Add Class</i></button>
+              <button type="button" class="btn btn-warning mb-3"><i class="bi bi-plus-circle"></i> Add Class</i></button>
             </a>
 
             <a href="{{ route('facilities.create') }}">
-              <button type="button" class="btn btn-danger mb-3">Add Facilities</i></button>
+              <button type="button" class="btn btn-danger mb-3"><i class="bi bi-plus-circle"></i> Add Facilities</i></button>
             </a>
             
             <a href="{{ route('room.export') }}">
-              <button type="button" class="btn btn-primary mb-3">Export Excel</i></button>
+              <button type="button" class="btn btn-primary mb-3"><i class="ri ri-file-excel-2-line
+                "></i> Export Excel</i></button>
             </a>
             
             <!-- Table with stripped rows -->
@@ -67,13 +68,13 @@
                     <a href="{{ route('facilities.edit', $room->room_id) }}" > <button type="button" class="btn btn-primary mb-3"><i class="bi bi-pencil-square"></i></button></a>
                     @endif --}}
                     <a href="{{ route('room.edit',$room->room_id) }}">
-                      <a href="{{ route('room.edit', $room->room_id) }}" > <button type="button" class="btn btn-primary mb-3"><i class="bi bi-pencil-square"></i></button></a>
+                      <a href="{{ route('room.edit', $room->room_id) }}" > <button type="button" class="btn btn-primary mb-3"><i class="bi bi-pencil-square"></i> Edit</button></a>
                     </a>
                     <form style="display: inline" method="POST" action="{{ route('room.destroy', $room->room_id) }}">
                       @csrf
                       @method('DELETE')
                       <button type="button" class="btn btn-xs btn-danger mb-3 btn-flat show-alert-delete-box">
-                          <i class="bi bi-trash"></i>
+                          <i class="bi bi-trash"> Delete</i>
                       </button>
                   </form>
 

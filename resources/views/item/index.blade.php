@@ -19,12 +19,14 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Datatables</h5>
+            @include('message/errors')
             <a href="{{ route('item.create') }}">
-              <button type="button" class="btn btn-success mb-3">Add Item</button>
+              <button type="button" class="btn btn-success mb-3"><i class="bi bi-plus-circle"></i> Add Item</button>
             </a>
 
             <a href="{{ route('item.export') }}"> 
-              <button type="button" class="btn btn-primary mb-3">Export Excel</button>
+              <button type="button" class="btn btn-primary mb-3"><i class="ri ri-file-excel-2-line
+                "></i> Export Excel</button>
             </a>
   
         
@@ -60,14 +62,14 @@
                     <td>{{ $item->purchase_date }}</td>
                     <td>
                       <a href="{{ route('item.edit', $item->item_id) }}">
-                        <button type="button" class="btn btn-primary mb-3"><i class="bi bi-pencil-square"></i></button>
+                        <button type="button" class="btn btn-primary mb-3"><i class="bi bi-pencil-square"></i> Edit</button>
                       </a>
   
                       <form style="display: inline" method="POST" action="{{ route('item.destroy', $item->item_id) }}">
                         @csrf
                         @method('delete')
                         <button type="button" class="btn btn-xs btn-danger mb-3 btn-flat show-alert-delete-box">
-                          <i class="bi bi-trash"></i>
+                          <i class="bi bi-trash"></i> Delete
                         </button>
                       </form>
                     </td>

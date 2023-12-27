@@ -23,7 +23,7 @@
             @include('message/errors')
             <p></p>
             <a href="{{ route('category.create') }}">
-              <button type="button" class="btn btn-success mb-3"><i class="bi bi-plus-circle"></i></button>
+              <button type="button" class="btn btn-success mb-3">Add Category</button>
             </a>
 
             <!-- Table with stripped rows -->

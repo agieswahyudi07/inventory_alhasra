@@ -28,31 +28,31 @@
 
                 </div>
             
-                {{-- <div class="col-12">
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Institution</label>
-                    <div class="col-sm-10">
-
-                        <select class="form-select" aria-label="Default select example" id="selInstitution" name="selInstitution">
-                        @if (session()->has('txtInstitution'))
-                          <option value="{{ Session::get('selInstitution') }}">{{ Session::get('txtInstitution') }}</option>
-                          @foreach ($data['institutions'] as $institution)
-                            <option value="{{ $institution->institution_id }}" {{ $institution->institution_id == $institution->institution_id ? 'selected' : '' }}>
-                                {{ $institution->institution_name }}
-                            </option>
-                          @endforeach       
-                        @else
-                          @foreach ($data['institutions'] as $institution)
-                            <option value="{{ $institution->institution_id }}" {{ $institution->institution_id == $institution->institution_id ? 'selected' : '' }}>
-                                {{ $institution->institution_name }}
-                            </option>
-                         @endforeach
-
-                        @endif                          
-                        </select>
-                    </div>
-                    </div>
-                </div>                 --}}
+                <div class="col-12" style="display: none">
+                  <div class="row mb-3">
+                      <label class="col-sm-2 col-form-label">Institution</label>
+                      <div class="col-sm-10">
+  
+                          <select class="form-select" aria-label="Default select example" id="selInstitution" name="selInstitution">
+                          @if (session()->has('txtInstitution'))
+                            <option value="{{ Session::get('selInstitution') }}">{{ Session::get('txtInstitution') }}</option>
+                            @foreach ($data['institutions'] as $institution)
+                              <option value="{{ $institution->institution_id }}" {{ $data['room']->institution_id == $institution->institution_id ? 'selected' : '' }}>
+                                  {{ $institution->institution_name }}
+                              </option>
+                            @endforeach
+                          @else
+                            @foreach ($data['institutions'] as $institution)
+                              <option value="{{ $institution->institution_id }}" {{ $data['room']->institution_id == $institution->institution_id ? 'selected' : '' }}>
+                                  {{ $institution->institution_name }}
+                              </option>
+                           @endforeach
+  
+                          @endif                          
+                          </select>
+                      </div>
+                      </div>
+                  </div>
                
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Submit</button>

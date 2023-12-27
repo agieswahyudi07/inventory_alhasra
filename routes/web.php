@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Item;
+// use App\Http\Controllers\Item;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\CategoryController;
@@ -70,9 +70,3 @@ Route::post('/facilities/store', [RoomController::class, 'facilities_store'])->n
 Route::get('/office/edit/{id}', [RoomController::class, 'office_edit'])->name('office.edit');
 Route::get('/class/edit/{id}', [RoomController::class, 'class_edit'])->name('class.edit');
 Route::get('/facilities/edit/{id}', [RoomController::class, 'facilities_edit'])->name('facilities.edit');
-// Route::put('/office/update/{id}', [RoomController::class, 'office_update'])->name('office.update');
-// Route::put('/class/update/{id}', [RoomController::class, 'class_update'])->name('class.update');
-// Route::put('/facilities/update/{id}', [RoomController::class, 'facilities_update'])->name('facilities.update');
-// Route::delete('/office/destroy/{id}', [RoomController::class, 'office_destroy'])->name('office.destroy');
-// Route::delete('/class/destroy/{id}', [RoomController::class, 'class_destroy'])->name('class.destroy');
-// Route::delete('/facilities/destroy/{id}', [RoomController::class, 'facilities_destroy'])->name('facilities.destroy');

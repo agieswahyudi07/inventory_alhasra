@@ -360,7 +360,7 @@ class RoomController extends Controller
             'categories' => $categories,
             'title' => $title
         ];
-
+        // dd($data);
         return view('room.edit', compact('data'));
     }
     // public function class_edit($id)
@@ -428,7 +428,7 @@ class RoomController extends Controller
             'room_name' => $request->input('txtRoomName'),
             'institution_id' => $request->input('selInstitution'),
         ];
-
+// dd($data);
         $room->update($data);
         Session::flash('success', 'Data successfully updated.');
         return redirect()->route('room.index');

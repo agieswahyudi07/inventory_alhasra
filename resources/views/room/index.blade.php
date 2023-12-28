@@ -19,6 +19,7 @@
 
                     <div class="card">
                         <div class="card-body">
+
                             <h5 class="card-title">{{ $data['title'] }}</h5>
 
                             @include('message/errors')
@@ -93,7 +94,17 @@
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
+                            <div class="card">
 
+                                <div class="card-body ">
+                                    <h5 class="card-title">Room Layout</h5>
+                                    <div class="bg-image hover-zoom">
+                                        <img src="{{ asset('assets/img/layout_ruangan.png') }}"
+                                            class="card-img-top img-fluid"alt="layout_ruangan">
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>

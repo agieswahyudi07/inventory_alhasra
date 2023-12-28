@@ -26,9 +26,9 @@
                             </a>
 
                             <a href="{{ route('item.export') }}">
-                                <button type="button" class="btn btn-primary mb-3"><i
-                                        class="ri ri-file-excel-2-line
-                "></i> Export Excel</button>
+                                <button type="button" class="btn btn-primary mb-3"><i class="ri ri-file-excel-2-line">
+                                    </i> Export Excel
+                                </button>
                             </a>
 
 

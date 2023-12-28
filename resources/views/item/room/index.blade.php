@@ -115,7 +115,7 @@
 
 
                             <!-- Table with stripped rows -->
-                            <table class="table datatable">
+                            <table class="table datatable table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>

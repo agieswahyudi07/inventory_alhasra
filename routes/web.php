@@ -24,8 +24,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [DashboardController::class, 'dashboard_index'])->name('dashboard.index');
 
 // Route Item Room Index
-Route::get('/room/{room_id}', [ItemController::class, 'item_room_index'])->name('item.room.index');
-Route::get('/room/item/export/{room_id}', [ItemController::class, 'item_room_export'])->name('item_room.export');
+Route::get('/item_room/{room_id}', [ItemController::class, 'item_room_index'])->name('item.room.index');
+Route::get('/item_room/export/{room_id}', [ItemController::class, 'item_room_export'])->name('item.room.export');
 
 
 // Route Item
@@ -34,7 +34,7 @@ Route::get('/item/create', [ItemController::class, 'item_create'])->name('item.c
 Route::post('/item/store', [ItemController::class, 'item_store'])->name('item.store');
 Route::get('/item/edit/{id}', [ItemController::class, 'item_edit'])->name('item.edit');
 Route::put('/item/update/{id}', [ItemController::class, 'item_update'])->name('item.update');
-Route::get('item/export/', [ItemController::class, 'export'])->name('item.export');
+Route::get('/item/export/', [ItemController::class, 'item_export'])->name('item.export');
 Route::delete('/item/destroy/{id}', [ItemController::class, 'item_destroy'])->name('item.destroy');
 
 // Route Institution
@@ -46,7 +46,7 @@ Route::delete('/institution/destroy/{id}', [InstitutionController::class, 'insti
 Route::get('/room', [RoomController::class, 'room_index'])->name('room.index');
 Route::get('/room/edit/{id}', [RoomController::class, 'room_edit'])->name('room.edit');
 Route::put('/room/update/{id}', [RoomController::class, 'room_update'])->name('room.update');
-Route::get('room/export/', [RoomController::class, 'export'])->name('room.export');
+Route::get('/room/export/', [RoomController::class, 'room_export'])->name('room.export');
 Route::delete('/room/destroy/{id}', [RoomController::class, 'room_destroy'])->name('room.destroy');
 
 // Route Category

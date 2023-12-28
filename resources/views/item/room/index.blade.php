@@ -106,11 +106,11 @@
                             <p></p>
 
                             @foreach ($data['items'] as $item)
-                                <a href="{{ route('item_room.export', ['room_id' => $item->room_id]) }}">
+                                <a href="{{ route('item.room.export', ['room_id' => $item->room_id]) }}">
                             @endforeach
-                            <button type="button" class="btn btn-success mb-3"><i
-                                    class="ri ri-file-excel-2-line
-                  "></i> Excel Export</button>
+                            <button type="button" class="btn btn-success mb-3">
+                                <i class="ri ri-file-excel-2-line"></i> Excel Export
+                            </button>
                             </a>
 
 

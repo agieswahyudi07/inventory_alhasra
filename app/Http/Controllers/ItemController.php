@@ -388,7 +388,7 @@ class ItemController extends Controller
      * Remove the specified resource from storage.
      */
 
-     public function export()
+     public function item_export()
 {
     // Logika untuk mengambil data dengan join
     $columns = [
@@ -404,7 +404,7 @@ class ItemController extends Controller
         ->join('ms_category', 'ms_category.category_id', '=', 'ms_item.category_id')
         ->get();
 
-    return Excel::download(new ItemExport($data), 'item-'.Carbon::now()->timestamp.'.xlsx');
+    return Excel::download(new ItemExport($data), 'All_item-'.Carbon::now()->timestamp.'.xlsx');
 }
 
 public function item_room_export($room_id)

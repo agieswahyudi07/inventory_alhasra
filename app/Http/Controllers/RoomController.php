@@ -434,13 +434,13 @@ class RoomController extends Controller
         return redirect()->route('room.index');
     }
 
-    public function export() 
+    public function room_export() 
     {
         $columns = [
             'ms_room.*', // Pilih semua kolom dari ms_item
             'ms_institution.institution_name',
         ];
-        
+        // dd($columns);
         $data = RoomModel::select($columns)
             ->join('ms_institution', 'ms_institution.institution_id', '=', 'ms_room.institution_id')
             ->join('tr_room_type', 'tr_room_type.room_type_id', '=', 'ms_room.room_type_id')

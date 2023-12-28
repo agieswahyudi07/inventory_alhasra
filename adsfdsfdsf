@@ -1,0 +1,12 @@
+* [33m5158c06[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m add table-striped
+* [33m08d06b0[m[33m ([m[1;31morigin/master[m[33m)[m fix feature export yang mengalamai URL Pattern Duplication
+* [33m041cb80[m Tambah Overview Item per Ruangan
+* [33m4ff5f2c[m delete templatetable-data.html
+* [33me2f68eb[m add icon to button
+* [33m7576225[m Bug Fixing Edit Room
+* [33m1cb1c24[m Menambahkan Fitur Export pada Item_room
+* [33m5be8e5f[m Change Repo on github
+* [33m755057e[m Add Heading and Relational Export Excel Features for Room and Item
+* [33m736eb20[m Excel Export Features
+* [33m37415ca[m make repo
+* [33mff1f96e[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Inventory Web

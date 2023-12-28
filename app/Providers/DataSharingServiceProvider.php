@@ -19,6 +19,7 @@ class DataSharingServiceProvider extends ServiceProvider
             $yayasan[] = [
                 'room_id' => $yys->room_id,
                 'room_name' => $yys->room_name,
+                'room_code' => $yys->room_code,
             ];
         }
 
@@ -28,6 +29,7 @@ class DataSharingServiceProvider extends ServiceProvider
             $smp[] = [
                 'room_id' => $mp->room_id,
                 'room_name' => $mp->room_name,
+                'room_code' => $mp->room_code,
             ];
         }
 
@@ -37,6 +39,7 @@ class DataSharingServiceProvider extends ServiceProvider
             $sma[] = [
                 'room_id' => $ma->room_id,
                 'room_name' => $ma->room_name,
+                'room_code' => $ma->room_code,
             ];
         }
 
@@ -46,6 +49,7 @@ class DataSharingServiceProvider extends ServiceProvider
             $smk[] = [
                 'room_id' => $mk->room_id,
                 'room_name' => $mk->room_name,
+                'room_code' => $mk->room_code,
             ];
         }
 
@@ -55,6 +59,7 @@ class DataSharingServiceProvider extends ServiceProvider
             $facilities[] = [
                 'room_id' => $fct->room_id,
                 'room_name' => $fct->room_name,
+                'room_code' => $fct->room_code,
             ];
         }
         // dd($yayasan);

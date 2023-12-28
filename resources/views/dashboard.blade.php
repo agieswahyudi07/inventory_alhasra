@@ -1,574 +1,615 @@
 @extends('layout.menu')
 @section('main')
-<main id="main" class="main">
+    <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+        <div class="pagetitle">
+            <h1>Dashboard</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
 
-    <section class="section dashboard">
-      <div class="row">
+        <section class="section dashboard">
+            <div class="row">
 
-        <!-- Left side columns -->
-        <div class="col-lg-12">
+                <!-- Left side columns -->
+                <div class="col-lg-12">
 
-          <div class="row">
+                    <div class="row">
 
-            <!-- Room Card -->
-              <div class="col-xxl-3 col-md-6">
-                <div class="card info-card revenue-card bg-primary">
+                        <!-- Room Card -->
+                        <div class="col-xxl-3 col-md-6">
+                            <div class="card info-card revenue-card bg-primary">
 
-                  <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                      <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                      </li>
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                            class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filter</h6>
+                                        </li>
 
-                      <li><a class="dropdown-item" href="#">Today</a></li>
-                      <li><a class="dropdown-item" href="#">This Month</a></li>
-                      <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                  </div>
+                                        <li><a class="dropdown-item" href="#">Today</a></li>
+                                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    </ul>
+                                </div>
 
-                  <div class="card-body">
-                    <h5 class="card-title ">Room | Total</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title ">Room | Total</h5>
 
-                    <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i class="bx bx-home-alt"></i>
-                      </div>
-                      <div class="ps-3">
-                        <h6>{{ $data1['room'] }}</h6>
-                        <span class=" small pt-1 fw-bold">ROOM</span> <span class="text-muted small pt-2 ps-1"></span>
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                            class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bx bx-home-alt"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>{{ $data1['room'] }}</h6>
+                                            <span class=" small pt-1 fw-bold">ROOM</span> <span
+                                                class="text-muted small pt-2 ps-1"></span>
 
-                      </div>
-                    </div>
-                  </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                </div>
-              </div>
-            <!-- End Room Card -->
+                            </div>
+                        </div>
+                        <!-- End Room Card -->
 
-            <!--Expenditure Card -->
-            <div class="col-xxl-6 col-xl-12">
+                        <!--Expenditure Card -->
+                        <div class="col-xxl-6 col-xl-12">
 
-              <div class="card info-card customers-card border border-warning
+                            <div class="card info-card customers-card border border-warning
               ">
 
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                            class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filter</h6>
+                                        </li>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
+                                        <li><a class="dropdown-item" href="#">Today</a></li>
+                                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    </ul>
+                                </div>
 
-                <div class="card-body">
-                  <h5 class="card-title">Total Expenditure <span>| This Year</span></h5>
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Expenditure <span>| This Year</span></h5>
 
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="ri ri-exchange-dollar-fill"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{ $data1['total'] }}</h6>
-                      <span class="text-danger small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                            class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="ri ri-exchange-dollar-fill"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>{{ $data1['total'] }}</h6>
+                                            <span class="text-danger small pt-1 fw-bold"></span> <span
+                                                class="text-muted small pt-2 ps-1">decrease</span>
 
-                    </div>
-                  </div>
+                                        </div>
+                                    </div>
 
-                </div>
-              </div>
+                                </div>
+                            </div>
 
-            </div><!-- End Expenditure Card -->
+                        </div><!-- End Expenditure Card -->
 
-            <!-- Item Card -->
-            <div class="col-xxl-3 col-md-6">
-              <div class="card info-card revenue-card bg-success">
+                        <!-- Item Card -->
+                        <div class="col-xxl-3 col-md-6">
+                            <div class="card info-card revenue-card bg-success">
 
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                            class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filter</h6>
+                                        </li>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
+                                        <li><a class="dropdown-item" href="#">Today</a></li>
+                                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    </ul>
+                                </div>
 
-                <div class="card-body">
-                  <h5 class="card-title">Item | Total</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title">Item | Total</h5>
 
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bx bx-chalkboard"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{ $data1['item'] }}</h6>
-                      <span class=" small pt-1 fw-bold">ITEM</span> <span class="text-muted small pt-2 ps-1"></span>
+                                    <div class="d-flex align-items-center">
+                                        <div
+                                            class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bx bx-chalkboard"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>{{ $data1['item'] }}</h6>
+                                            <span class=" small pt-1 fw-bold">ITEM</span> <span
+                                                class="text-muted small pt-2 ps-1"></span>
 
-                    </div>
-                  </div>
-                </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-              </div>
-            </div><!-- End Revenue Card -->
-            
-          </div>
-          
-          <div class="row">
+                            </div>
+                        </div><!-- End Revenue Card -->
 
-            <div class="col-3 d-inline-block pt-3 rounded ">
-                <!-- Office Card -->
-                <div class="col-xxl-12 col-md-6 ">
-                  <div class="card info-card room-card border border-primary">
-
-                    <div class="filter">
-                      <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <li class="dropdown-header text-start">
-                          <h6>Filter</h6>
-                        </li>
-
-                        <li><a class="dropdown-item" href="#">Today</a></li>
-                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                        <li><a class="dropdown-item" href="#">This Year</a></li>
-                      </ul>
                     </div>
 
-                    <div class="card-body">
-                      <h5 class="card-title">Office <span>| Total</span></h5>
+                    <div class="row">
 
-                      <div class="d-flex align-items-center">
-                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                          <i class="ri-building-2-line"></i>
+                        <div class="col-3 d-inline-block pt-3 rounded ">
+                            <!-- Office Card -->
+                            <div class="col-xxl-12 col-md-6 ">
+                                <div class="card info-card room-card border border-primary">
+
+                                    <div class="filter">
+                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                                class="bi bi-three-dots"></i></a>
+                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                            <li class="dropdown-header text-start">
+                                                <h6>Filter</h6>
+                                            </li>
+
+                                            <li><a class="dropdown-item" href="#">Today</a></li>
+                                            <li><a class="dropdown-item" href="#">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <h5 class="card-title">Office <span>| Total</span></h5>
+
+                                        <div class="d-flex align-items-center">
+                                            <div
+                                                class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                <i class="ri-building-2-line"></i>
+                                            </div>
+                                            <div class="ps-3">
+                                                <h6>{{ $data1['office'] }}</h6>
+                                                <span class="text-success small pt-1 fw-bold">OFFICE</span> <span
+                                                    class="text-muted small pt-2 ps-1"></span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- End Office Card -->
+
+                            <!-- Class Card -->
+                            <div class="col-xxl-12 col-md-6 ">
+                                <div class="card info-card room-card border border-primary">
+
+                                    <div class="filter">
+                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                                class="bi bi-three-dots"></i></a>
+                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                            <li class="dropdown-header text-start">
+                                                <h6>Filter</h6>
+                                            </li>
+
+                                            <li><a class="dropdown-item" href="#">Today</a></li>
+                                            <li><a class="dropdown-item" href="#">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <h5 class="card-title">Class <span>| Total</span></h5>
+
+                                        <div class="d-flex align-items-center">
+                                            <div
+                                                class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                <i class="ri-home-line"></i>
+                                            </div>
+                                            <div class="ps-3">
+                                                <h6>{{ $data1['class'] }}</h6>
+                                                <span class="text-success small pt-1 fw-bold">CLASS</span> <span
+                                                    class="text-muted small pt-2 ps-1"></span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- End Class Card -->
+
+                            <!-- Facilities Card -->
+                            <div class="col-xxl-12 col-md-6 ">
+                                <div class="card info-card room-card border border-primary">
+
+                                    <div class="filter">
+                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                                class="bi bi-three-dots"></i></a>
+                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                            <li class="dropdown-header text-start">
+                                                <h6>Filter</h6>
+                                            </li>
+
+                                            <li><a class="dropdown-item" href="#">Today</a></li>
+                                            <li><a class="dropdown-item" href="#">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <h5 class="card-title">Facilities <span>| Total</span></h5>
+
+                                        <div class="d-flex align-items-center">
+                                            <div
+                                                class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                <i class="ri-microscope-line"></i>
+                                            </div>
+                                            <div class="ps-3">
+                                                <h6>{{ $data1['facilities'] }}</h6>
+                                                <span class="text-success small pt-1 fw-bold">FACILITIES</span> <span
+                                                    class="text-muted small pt-2 ps-1"></span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- End Facilities Card -->
                         </div>
-                        <div class="ps-3">
-                          <h6>{{ $data1['office'] }}</h6>
-                          <span class="text-success small pt-1 fw-bold">OFFICE</span> <span class="text-muted small pt-2 ps-1"></span>
+
+                        <div class="col d-inline-block  pt-3  ">
+
+                            <div class="row">
+
+
+                                <!-- Revenue Card -->
+                                <div class="col-xxl-4 col-md-6 ">
+                                    <div class="card info-card revenue-card border border-success">
+
+                                        <div class="filter">
+                                            <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                                    class="bi bi-three-dots"></i></a>
+                                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <li class="dropdown-header text-start">
+                                                    <h6>Filter</h6>
+                                                </li>
+
+                                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <h5 class="card-title">Technology and Electrical <span>| Total</span></h5>
+
+                                            <div class="d-flex align-items-center">
+                                                <div
+                                                    class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                    <i class="ri-computer-line"></i>
+                                                </div>
+                                                <div class="ps-3">
+                                                    <h6>{{ $data1['technology'] }}</h6>
+                                                    <span class="text-success small pt-1 fw-bold">Units</span> <span
+                                                        class="text-muted small pt-2 ps-1"></span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div><!-- End Revenue Card -->
+
+                                <!-- Furniture Card -->
+                                <div class="col-xxl-4 col-md-6 ">
+                                    <div class="card info-card revenue-card border border-success">
+
+                                        <div class="filter">
+                                            <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                                    class="bi bi-three-dots"></i></a>
+                                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <li class="dropdown-header text-start">
+                                                    <h6>Filter</h6>
+                                                </li>
+
+                                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <h5 class="card-title">Furniture <span>| Total</span></h5>
+
+                                            <div class="d-flex align-items-center">
+                                                <div
+                                                    class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                    <i class="bx bx-chair"></i>
+                                                </div>
+                                                <div class="ps-3">
+                                                    <h6>{{ $data1['room'] }}</h6>
+                                                    <span class="text-success small pt-1 fw-bold">FURNITURE</span> <span
+                                                        class="text-muted small pt-2 ps-1"></span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- End Furniture Card -->
+
+                                <!-- Stationary Card -->
+                                <div class="col-xxl-4 col-md-6 ">
+                                    <div class="card info-card revenue-card border border-success">
+
+                                        <div class="filter">
+                                            <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                                    class="bi bi-three-dots"></i></a>
+                                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <li class="dropdown-header text-start">
+                                                    <h6>Filter</h6>
+                                                </li>
+
+                                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <h5 class="card-title">Stationary <span>| Total</span></h5>
+
+                                            <div class="d-flex align-items-center">
+                                                <div
+                                                    class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                    <i class="bi-pen"></i>
+                                                </div>
+                                                <div class="ps-3">
+                                                    <h6>{{ $data1['stationary'] }}</h6>
+                                                    <span class="text-success small pt-1 fw-bold">STATIONARY</span> <span
+                                                        class="text-muted small pt-2 ps-1"></span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- End Stationary Card -->
+
+                                <!-- Clean Card -->
+                                <div class="col-xxl-4 col-md-6 ">
+                                    <div class="card info-card revenue-card border border-success">
+
+                                        <div class="filter">
+                                            <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                                    class="bi bi-three-dots"></i></a>
+                                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <li class="dropdown-header text-start">
+                                                    <h6>Filter</h6>
+                                                </li>
+
+                                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <h5 class="card-title">Clean <span>| Total</span></h5>
+
+                                            <div class="d-flex align-items-center">
+                                                <div
+                                                    class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                    <i class="bi bi-shield-plus"></i>
+                                                </div>
+                                                <div class="ps-3">
+                                                    <h6>{{ $data1['clean'] }}</h6>
+                                                    <span class="text-success small pt-1 fw-bold">CLEAN</span> <span
+                                                        class="text-muted small pt-2 ps-1"></span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- End Clean Card -->
+
+                                <!-- Utility Card -->
+                                <div class="col-xxl-4 col-md-6 ">
+                                    <div class="card info-card revenue-card border border-success">
+
+                                        <div class="filter">
+                                            <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                                    class="bi bi-three-dots"></i></a>
+                                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <li class="dropdown-header text-start">
+                                                    <h6>Filter</h6>
+                                                </li>
+
+                                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <h5 class="card-title">Utility <span>| Total</span></h5>
+
+                                            <div class="d-flex align-items-center">
+                                                <div
+                                                    class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                    <i class="bi bi-tools"></i>
+                                                </div>
+                                                <div class="ps-3">
+                                                    <h6>{{ $data1['utility'] }}</h6>
+                                                    <span class="text-success small pt-1 fw-bold">UTILITY</span> <span
+                                                        class="text-muted small pt-2 ps-1"></span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- End Utility Card -->
+
+
+                            </div>
 
                         </div>
-                      </div>
                     </div>
 
-                  </div>
-                </div>
-                <!-- End Office Card -->
+                </div><!-- End Left side columns -->
 
-                <!-- Class Card -->
-                <div class="col-xxl-12 col-md-6 ">
-                  <div class="card info-card room-card border border-primary">
-
-                    <div class="filter">
-                      <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <li class="dropdown-header text-start">
-                          <h6>Filter</h6>
-                        </li>
-
-                        <li><a class="dropdown-item" href="#">Today</a></li>
-                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                        <li><a class="dropdown-item" href="#">This Year</a></li>
-                      </ul>
-                    </div>
-
-                    <div class="card-body">
-                      <h5 class="card-title">Class <span>| Total</span></h5>
-
-                      <div class="d-flex align-items-center">
-                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                          <i class="ri-home-line"></i>
-                        </div>
-                        <div class="ps-3">
-                          <h6>{{ $data1['class'] }}</h6>
-                          <span class="text-success small pt-1 fw-bold">CLASS</span> <span class="text-muted small pt-2 ps-1"></span>
-
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-                <!-- End Class Card -->
-
-               <!-- Facilities Card -->
-               <div class="col-xxl-12 col-md-6 "> 
-                <div class="card info-card room-card border border-primary">
-
-                  <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                      <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                      </li>
-
-                      <li><a class="dropdown-item" href="#">Today</a></li>
-                      <li><a class="dropdown-item" href="#">This Month</a></li>
-                      <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                  </div>
-
-                  <div class="card-body">
-                    <h5 class="card-title">Facilities <span>| Total</span></h5>
-
-                    <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i class="ri-microscope-line"></i>
-                      </div>
-                      <div class="ps-3">
-                        <h6>{{ $data1['facilities'] }}</h6>
-                        <span class="text-success small pt-1 fw-bold">FACILITIES</span> <span class="text-muted small pt-2 ps-1"></span>
-
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <!-- End Facilities Card -->
-            </div>
-
-            <div class="col d-inline-block  pt-3  ">
-             
-                <div class="row">
-                   
-
-                    <!-- Revenue Card -->
-                    <div class="col-xxl-4 col-md-6 ">
-                      <div class="card info-card revenue-card border border-success">
+                <!-- Recent Item -->
+                <div class="col-12 mt-3">
+                    <div class="card recent-sales overflow-auto">
 
                         <div class="filter">
-                          <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                              <h6>Filter</h6>
-                            </li>
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                    class="bi bi-three-dots"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                <li class="dropdown-header text-start">
+                                    <h6>Filter</h6>
+                                </li>
 
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
-                          </ul>
+                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                            </ul>
                         </div>
 
                         <div class="card-body">
-                          <h5 class="card-title">Technology and Electrical <span>| Total</span></h5>
+                            <h5 class="card-title">Recent Item <span>| Today</span></h5>
 
-                          <div class="d-flex align-items-center">
-                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                              <i class="ri-computer-line"></i>
-                            </div>
-                            <div class="ps-3">
-                              <h6>{{ $data1['technology'] }}</h6>
-                              <span class="text-success small pt-1 fw-bold">Units</span> <span class="text-muted small pt-2 ps-1"></span>
+                            <table class="table table-borderless datatable table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Item Code</th>
+                                        <th scope="col">Item Name</th>
+                                        <th scope="col">Location</th>
+                                        <th scope="col">Purchase Date</th>
+                                        <th scope="col">Price</th>
+                                        {{-- <th scope="col">Status</th> --}}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($data1['recent'] as $item)
+                                        <tr>
+                                            <td>{{ $item['item_code'] }}</td>
+                                            <td>{{ $item['item_name'] }}</td>
+                                            <td>{{ $item['room_name'] }}</td>
+                                            <td>{{ $item['purchase_date'] }}</td>
+                                            <td>{{ 'Rp ' . number_format($item['item_price'], 0, ',', '.') }}</td>
+                                            {{-- <td><span class="badge bg-success">{{ $item['status'] }}</span></td> --}}
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
 
-                            </div>
-                          </div>
                         </div>
 
-                      </div>
-                    </div><!-- End Revenue Card -->
+                    </div>
+                </div><!-- End Recent Item -->
 
-                    <!-- Furniture Card -->
-                    <div class="col-xxl-4 col-md-6 ">
-                      <div class="card info-card revenue-card border border-success">
+                <!-- Reports -->
+                <div class="col-12">
+                    <div class="card">
 
                         <div class="filter">
-                          <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                              <h6>Filter</h6>
-                            </li>
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                    class="bi bi-three-dots"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                <li class="dropdown-header text-start">
+                                    <h6>Filter</h6>
+                                </li>
 
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
-                          </ul>
+                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                            </ul>
                         </div>
 
                         <div class="card-body">
-                          <h5 class="card-title">Furniture <span>| Total</span></h5>
+                            <h5 class="card-title">Reports <span>/Today</span></h5>
 
-                          <div class="d-flex align-items-center">
-                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                              <i class="bx bx-chair"></i>
-                            </div>
-                            <div class="ps-3">
-                              <h6>{{ $data1['room'] }}</h6>
-                              <span class="text-success small pt-1 fw-bold">FURNITURE</span> <span class="text-muted small pt-2 ps-1"></span>
+                            <!-- Line Chart -->
+                            <div id="reportsChart"></div>
 
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-                    <!-- End Furniture Card -->
-
-                   <!-- Stationary Card -->
-                   <div class="col-xxl-4 col-md-6 ">
-                    <div class="card info-card revenue-card border border-success">
-
-                      <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                          <li class="dropdown-header text-start">
-                            <h6>Filter</h6>
-                          </li>
-
-                          <li><a class="dropdown-item" href="#">Today</a></li>
-                          <li><a class="dropdown-item" href="#">This Month</a></li>
-                          <li><a class="dropdown-item" href="#">This Year</a></li>
-                        </ul>
-                      </div>
-
-                      <div class="card-body">
-                        <h5 class="card-title">Stationary <span>| Total</span></h5>
-
-                        <div class="d-flex align-items-center">
-                          <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                            <i class="bi-pen"></i>
-                          </div>
-                          <div class="ps-3">
-                            <h6>{{ $data1['stationary'] }}</h6>
-                            <span class="text-success small pt-1 fw-bold">STATIONARY</span> <span class="text-muted small pt-2 ps-1"></span>
-
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-                  <!-- End Stationary Card -->
-              
-                 <!-- Clean Card -->
-                 <div class="col-xxl-4 col-md-6 ">
-                  <div class="card info-card revenue-card border border-success">
-
-                    <div class="filter">
-                      <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <li class="dropdown-header text-start">
-                          <h6>Filter</h6>
-                        </li>
-
-                        <li><a class="dropdown-item" href="#">Today</a></li>
-                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                        <li><a class="dropdown-item" href="#">This Year</a></li>
-                      </ul>
-                    </div>
-
-                    <div class="card-body">
-                      <h5 class="card-title">Clean <span>| Total</span></h5>
-
-                      <div class="d-flex align-items-center">
-                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                          <i class="bi bi-shield-plus"></i>
-                        </div>
-                        <div class="ps-3">
-                          <h6>{{ $data1['clean'] }}</h6>
-                          <span class="text-success small pt-1 fw-bold">CLEAN</span> <span class="text-muted small pt-2 ps-1"></span>
+                            <script>
+                                document.addEventListener("DOMContentLoaded", () => {
+                                    new ApexCharts(document.querySelector("#reportsChart"), {
+                                        series: [{
+                                            name: 'Sales',
+                                            data: [31, 40, 28, 51, 42, 82, 56],
+                                        }, {
+                                            name: 'Revenue',
+                                            data: [11, 32, 45, 32, 34, 52, 41]
+                                        }, {
+                                            name: 'Customers',
+                                            data: [15, 11, 32, 18, 9, 24, 11]
+                                        }],
+                                        chart: {
+                                            height: 350,
+                                            type: 'area',
+                                            toolbar: {
+                                                show: false
+                                            },
+                                        },
+                                        markers: {
+                                            size: 4
+                                        },
+                                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                                        fill: {
+                                            type: "gradient",
+                                            gradient: {
+                                                shadeIntensity: 1,
+                                                opacityFrom: 0.3,
+                                                opacityTo: 0.4,
+                                                stops: [0, 90, 100]
+                                            }
+                                        },
+                                        dataLabels: {
+                                            enabled: false
+                                        },
+                                        stroke: {
+                                            curve: 'smooth',
+                                            width: 2
+                                        },
+                                        xaxis: {
+                                            type: 'datetime',
+                                            categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z",
+                                                "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z",
+                                                "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z",
+                                                "2018-09-19T06:30:00.000Z"
+                                            ]
+                                        },
+                                        tooltip: {
+                                            x: {
+                                                format: 'dd/MM/yy HH:mm'
+                                            },
+                                        }
+                                    }).render();
+                                });
+                            </script>
+                            <!-- End Line Chart -->
 
                         </div>
-                      </div>
+
                     </div>
+                </div><!-- End Reports -->
 
-                  </div>
-                </div>
-                <!-- End Clean Card -->
+                <!-- Right side columns -->
+                <div class="col-lg-4">
 
-               <!-- Utility Card -->
-               <div class="col-xxl-4 col-md-6 ">
-                <div class="card info-card revenue-card border border-success">
-
-                  <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                      <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                      </li>
-
-                      <li><a class="dropdown-item" href="#">Today</a></li>
-                      <li><a class="dropdown-item" href="#">This Month</a></li>
-                      <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                  </div>
-
-                  <div class="card-body">
-                    <h5 class="card-title">Utility <span>| Total</span></h5>
-
-                    <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i class="bi bi-tools"></i>
-                      </div>
-                      <div class="ps-3">
-                        <h6>{{ $data1['utility'] }}</h6>
-                        <span class="text-success small pt-1 fw-bold">UTILITY</span> <span class="text-muted small pt-2 ps-1"></span>
-
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <!-- End Utility Card -->
-
-               
-            </div>
-                    
-          </div>  
-        </div>
-
-        </div><!-- End Left side columns -->
-
-         <!-- Recent Item -->
-         <div class="col-12 mt-3">
-          <div class="card recent-sales overflow-auto">
-
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body">
-              <h5 class="card-title">Recent Item <span>| Today</span></h5>
-
-              <table class="table table-borderless datatable">
-                <thead>
-                  <tr>
-                    <th scope="col">Item Code</th>
-                    <th scope="col">Item Name</th>
-                    <th scope="col">Purchase Date</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($data1['recent'] as $item)
-                  <tr>
-                    <td>{{ $item['item_code'] }}</td>
-                    <td>{{ $item['item_name'] }}</td>
-                    <td>{{ $item['purchase_date'] }}</td>
-                    <td>{{ 'Rp ' . number_format($item['item_price'], 0, ',', '.') }}</td>
-                    <td><span class="badge bg-success">{{ $item['status'] }}</span></td>
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
-
-            </div>
-
-          </div>
-        </div><!-- End Recent Item -->
-
-          <!-- Reports -->
-          <div class="col-12">
-            <div class="card">
-
-              <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                  <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                  </li>
-
-                  <li><a class="dropdown-item" href="#">Today</a></li>
-                  <li><a class="dropdown-item" href="#">This Month</a></li>
-                  <li><a class="dropdown-item" href="#">This Year</a></li>
-                </ul>
-              </div>
-
-              <div class="card-body">
-                <h5 class="card-title">Reports <span>/Today</span></h5>
-
-                <!-- Line Chart -->
-                <div id="reportsChart"></div>
-
-                <script>
-                  document.addEventListener("DOMContentLoaded", () => {
-                    new ApexCharts(document.querySelector("#reportsChart"), {
-                      series: [{
-                        name: 'Sales',
-                        data: [31, 40, 28, 51, 42, 82, 56],
-                      }, {
-                        name: 'Revenue',
-                        data: [11, 32, 45, 32, 34, 52, 41]
-                      }, {
-                        name: 'Customers',
-                        data: [15, 11, 32, 18, 9, 24, 11]
-                      }],
-                      chart: {
-                        height: 350,
-                        type: 'area',
-                        toolbar: {
-                          show: false
-                        },
-                      },
-                      markers: {
-                        size: 4
-                      },
-                      colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                      fill: {
-                        type: "gradient",
-                        gradient: {
-                          shadeIntensity: 1,
-                          opacityFrom: 0.3,
-                          opacityTo: 0.4,
-                          stops: [0, 90, 100]
-                        }
-                      },
-                      dataLabels: {
-                        enabled: false
-                      },
-                      stroke: {
-                        curve: 'smooth',
-                        width: 2
-                      },
-                      xaxis: {
-                        type: 'datetime',
-                        categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                      },
-                      tooltip: {
-                        x: {
-                          format: 'dd/MM/yy HH:mm'
-                        },
-                      }
-                    }).render();
-                  });
-                </script>
-                <!-- End Line Chart -->
-
-              </div>
-
-            </div>
-          </div><!-- End Reports -->
-
-        <!-- Right side columns -->
-        <div class="col-lg-4">
-
-          {{-- <!-- Recent Activity -->
+                    {{-- <!-- Recent Activity -->
           <div class="card">
             <div class="filter">
               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -641,7 +682,7 @@
             </div>
           </div><!-- End Recent Activity --> --}}
 
-          {{-- <!-- Budget Report -->
+                    {{-- <!-- Budget Report -->
           <div class="card">
             <div class="filter">
               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -715,7 +756,7 @@
             </div>
           </div><!-- End Budget Report --> --}}
 
-          {{-- <!-- Website Traffic -->
+                    {{-- <!-- Website Traffic -->
           <div class="card">
             <div class="filter">
               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -793,11 +834,11 @@
             </div>
           </div><!-- End Website Traffic --> --}}
 
-          
-        </div><!-- End Right side columns -->
 
-      </div>
-    </section>
+                </div><!-- End Right side columns -->
 
-  </main><!-- End #main -->
+            </div>
+        </section>
+
+    </main><!-- End #main -->
 @endsection

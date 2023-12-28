@@ -28,7 +28,7 @@ class RoomController extends Controller
 
     public function room_index()
     {
-        $rooms = RoomModel::orderBy('room_id', 'desc')->get();
+        $rooms = RoomModel::orderBy('room_id', 'asc')->get();
         $title = "Room";
 
         foreach ($rooms as $room) {

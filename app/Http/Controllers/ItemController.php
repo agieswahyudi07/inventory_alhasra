@@ -17,18 +17,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
-    /**
-     * Show the form for creating a new resource.
-     */
-
-    /**
-     * Display the specified resource.
-     */
-
     public function item_index()
     {
         $items = ItemModel::orderBy('item_id', 'desc')->get();
@@ -89,14 +77,10 @@ class ItemController extends Controller
             'total_price' => $total_price_formated
         ];
 
-        // dd($items);
         return view('item.room.index', compact('data'));
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function item_create()
     {
         $institution = InstitutionModel::all();
@@ -114,9 +98,6 @@ class ItemController extends Controller
         return view('item.add', compact('data'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function item_store(Request $request)
     {
         $ItemModel = new ItemModel();
@@ -298,7 +279,6 @@ class ItemController extends Controller
             if ($purchase_date === false) {
                 $purchase_date = null;
             }
-            // dd($purchase_date);
             $data = [
                 'item_name' => $itemName,
                 'item_brand' => $itemBrand,
@@ -322,17 +302,6 @@ class ItemController extends Controller
         return redirect()->route('item.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function kantor_yayasan_show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function item_edit($id)
     {
         $item = DB::table('ms_item')->where('item_id', '=', $id)->first();
@@ -345,9 +314,6 @@ class ItemController extends Controller
         return view('item.edit', compact('data'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function item_update(Request $request, $id)
     {
         $item = ItemModel::find($id);
@@ -384,20 +350,16 @@ class ItemController extends Controller
         return redirect()->route('item.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
 
      public function item_export()
 {
-    // Logika untuk mengambil data dengan join
     $columns = [
-        'ms_item.*', // Pilih semua kolom dari ms_item
+        'ms_item.*',
         'ms_institution.institution_name',
         'ms_room.room_name',
         'ms_category.category_name',
     ];
-    
+
     $data = ItemModel::select($columns)
         ->join('ms_institution', 'ms_institution.institution_id', '=', 'ms_item.institution_id')
         ->join('ms_room', 'ms_room.room_id', '=', 'ms_item.room_id')

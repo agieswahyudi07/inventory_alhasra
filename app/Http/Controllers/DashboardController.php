@@ -35,7 +35,11 @@ class DashboardController extends Controller
 
         $recentItems = ItemModel::orderBy('item_id', 'desc')->get();
 
-
+        $recentItems = ItemModel::orderBy('item_id', 'desc')
+            ->join('ms_room', 'ms_item.room_id', '=', 'ms_room.room_id')
+            ->select('ms_item.*', 'ms_room.room_name')
+            ->get();
+            
         $data1 = [
             'item' => $item,
             'technology' => $technology,

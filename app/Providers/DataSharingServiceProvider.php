@@ -23,7 +23,11 @@ class DataSharingServiceProvider extends ServiceProvider
             ];
         }
 
-        $room_smp = DB::table('ms_room')->where('institution_id', '=', '2')->get();
+        // $room_smp = DB::table('ms_room')->where('institution_id', '=', '2')->get();
+        $room_smp = DB::table('ms_room')
+            ->where('institution_id', '=', '2')
+            ->orderBy('room_name')
+            ->get();
         $smp = [];
         foreach ($room_smp as $mp) {
             $smp[] = [
@@ -33,7 +37,7 @@ class DataSharingServiceProvider extends ServiceProvider
             ];
         }
 
-        $room_sma = DB::table('ms_room')->where('institution_id', '=', '3')->get();
+        $room_sma = DB::table('ms_room')->where('institution_id', '=', '3')->orderBy('room_name')->get();
         $sma = [];
         foreach ($room_sma as $ma) {
             $sma[] = [
@@ -43,7 +47,7 @@ class DataSharingServiceProvider extends ServiceProvider
             ];
         }
 
-        $room_smk = DB::table('ms_room')->where('institution_id', '=', '4')->get();
+        $room_smk = DB::table('ms_room')->where('institution_id', '=', '4')->orderBy('room_name')->get();
         $smk = [];
         foreach ($room_smk as $mk) {
             $smk[] = [

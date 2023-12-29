@@ -1,49 +1,62 @@
 @extends('layout/menu')
 @section('main')
-  <main id="main" class="main">
+    <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Data Tables</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Tables</li>
-          <li class="breadcrumb-item active">Data</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-  
-    <section class="section">
-        <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Vertical Form</h5>
-              @include('message/errors')
-              <!-- Vertical Form -->
-              <form class="row g-3"  method="POST" action="{{ route('item.update', $data[0]->item_id) }}">
-                @csrf
-                @method('PUT')
-                <div class="col-12">
-                  <label for="txtItemName" class="form-label">Item Name</label>
-                  <input type="text" class="form-control" id="txtItemName" name="txtItemName" value="{{ session()->has('txtItemName') ? Session::get('txtItemName') : $data[0]->item_name;  }}">
-                </div>
+        <div class="pagetitle">
+            <h1>Data Tables</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item">Tables</li>
+                    <li class="breadcrumb-item active">Data</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
 
-                <div class="col-12">
-                  <label for="txtItemBrand" class="form-label">Item Brand</label>
-                  <input type="text" class="form-control" id="txtItemBrand" name="txtItemBrand" value="{{ session()->has('txtItemBrand') ? Session::get('txtItemBrand') : $data[0]->item_brand;  }}">
-                </div>
-                
-                <div class="col-12">
-                  <label for="txtItemType" class="form-label">Item Type</label>
-                  <input type="text" class="form-control" id="txtItemType" name="txtItemType" value="{{ session()->has('txtItemType') ? Session::get('txtItemType') : $data[0]->item_type;  }}">
-                </div>
+        <section class="section">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Vertical Form</h5>
+                    @include('message/errors')
+                    <!-- Vertical Form -->
+                    <form class="row g-3" method="POST" action="{{ route('item.update', $data[0]->item_id) }}">
+                        @csrf
+                        @method('PUT')
 
-                <div class="col-12">
-                  <label for="txtItemPrice" class="form-label">Item Price</label>
-                  <input type="number" class="form-control" id="txtItemPrice" name="txtItemPrice" value="{{ session()->has('txtItemPrice') ? Session::get('txtItemPrice') : $data[0]->item_price;  }}">
-                </div>
+                        <div class="row mb-3">
+                            <label for="txtItemName" class="col-sm-2 col-form-label">Item Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txtItemName" name="txtItemName"
+                                    value="{{ session()->has('txtItemName') ? Session::get('txtItemName') : $data[0]->item_name }}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="txtItemBrand" class="col-sm-2 col-form-label">Item Brand</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txtItemBrand" name="txtItemBrand"
+                                    value="{{ session()->has('txtItemBrand') ? Session::get('txtItemBrand') : $data[0]->item_brand }}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="txtItemType" class="col-sm-2 col-form-label">Item Type</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txtItemType" name="txtItemType"
+                                    value="{{ session()->has('txtItemType') ? Session::get('txtItemType') : $data[0]->item_type }}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="txtItemPrice" class="col-sm-2 col-form-label">Item Price</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="txtItemPrice" name="txtItemPrice"
+                                    value="{{ session()->has('txtItemPrice') ? Session::get('txtItemPrice') : $data[0]->item_price }}">
+                            </div>
+                        </div>
 
 
-                {{-- <div class="col-12">
+                        {{-- <div class="col-12">
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Institution</label>
                     <div class="col-sm-10">
@@ -121,7 +134,7 @@
                         </div>
                     </div> --}}
 
-                {{-- <div class="col-12">
+                        {{-- <div class="col-12">
                     <div class="row mb-3">
                         <label for="inputDate" class="col-sm-2 col-form-label">Purchase Date</label>
                         <div class="col-sm-10">
@@ -129,23 +142,22 @@
                         </div>
                       </div>
                 </div> --}}
-                <div class="col-12">
-                    <div class="input-group">
-                        <span class="input-group-text">Notes</span>
-                        <textarea class="form-control" aria-label="With textarea" id="txtNotes" name="txtNotes">{{ session()->has('txtNotes') ? Session::get('txtNotes') : $data[0]->notes; }}</textarea>
-                      </div>
-                </div>
+                        <div class="row mb-3">
+                            <label for="txtNotes" class="col-sm-2 col-form-label">Notes</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" aria-label="With textarea" id="txtNotes" name="txtNotes">{{ session()->has('txtNotes') ? Session::get('txtNotes') : $data[0]->notes }}</textarea>
+                            </div>
+                        </div>
 
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form><!-- Vertical Form -->
+
                 </div>
-              </form><!-- Vertical Form -->
-        
             </div>
-          </div>
-        
-    </section>
-  
-  </main><!-- End #main -->
 
+        </section>
+
+    </main><!-- End #main -->
 @endsection

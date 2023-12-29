@@ -86,7 +86,7 @@ class ItemController extends Controller
         $institution = InstitutionModel::all();
         $room = RoomModel::all();
         $category = CategoryModel::all();
-        $title = "Item";
+        $title = "ITEM";
 
         $data = [
             'institutions' => $institution,

@@ -309,7 +309,7 @@
                         <li>
                             <a href="{{ route('item.room.index', ['room_id' => $yayasan['room_id']]) }}">
                                 <i
-                                    class="bi bi-circle"></i>{{ $yayasan['room_code'] . '-' . $yayasan['room_name'] }}<span></span>
+                                    class="bi bi-circle"></i>{{ $yayasan['room_code'] . ' | ' . $yayasan['room_name'] }}<span></span>
                             </a>
                         </li>
                     @endforeach
@@ -328,7 +328,7 @@
                         <li>
                             <a href="{{ route('item.room.index', ['room_id' => $smk['room_id']]) }}">
                                 <i
-                                    class="bi bi-circle"></i>{{ $smk['room_code'] . '-' . $smk['room_name'] }}<span></span>
+                                    class="bi bi-circle"></i>{{ $smk['room_code'] . ' | ' . $smk['room_name'] }}<span></span>
                             </a>
                         </li>
                     @endforeach
@@ -344,7 +344,7 @@
                         <li>
                             <a href="{{ route('item.room.index', ['room_id' => $sma['room_id']]) }}">
                                 <i
-                                    class="bi bi-circle"></i>{{ $sma['room_code'] . '-' . $sma['room_name'] }}<span></span>
+                                    class="bi bi-circle"></i>{{ $sma['room_code'] . ' | ' . $sma['room_name'] }}<span></span>
                             </a>
                         </li>
                     @endforeach
@@ -360,7 +360,7 @@
                         <li>
                             <a href="{{ route('item.room.index', ['room_id' => $smp['room_id']]) }}">
                                 <i
-                                    class="bi bi-circle"></i>{{ $smp['room_code'] . '-' . $smp['room_name'] }}<span></span>
+                                    class="bi bi-circle"></i>{{ $smp['room_code'] . ' | ' . $smp['room_name'] }}<span></span>
                             </a>
                         </li>
                     @endforeach
@@ -379,7 +379,7 @@
                         <li>
                             <a href="{{ route('item.room.index', ['room_id' => $fct['room_id']]) }}">
                                 <i
-                                    class="bi bi-circle"></i>{{ $fct['room_code'] . '-' . $fct['room_name'] }}<span></span>
+                                    class="bi bi-circle"></i>{{ $fct['room_code'] . ' | ' . $fct['room_name'] }}<span></span>
                             </a>
                         </li>
                     @endforeach

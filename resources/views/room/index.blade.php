@@ -94,6 +94,7 @@
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
+
                             <div class="card">
 
                                 <div class="card-body ">

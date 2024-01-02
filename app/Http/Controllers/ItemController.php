@@ -366,7 +366,7 @@ class ItemController extends Controller
         ->join('ms_category', 'ms_category.category_id', '=', 'ms_item.category_id')
         ->get();
 
-    return Excel::download(new ItemExport($data), 'All_item-'.Carbon::now()->timestamp.'.xlsx');
+    return Excel::download(new ItemExport($data), 'All_item |'.Carbon::now()->timestamp.'.xlsx');
 }
 
 public function item_room_export($room_id)
@@ -386,7 +386,7 @@ public function item_room_export($room_id)
         ->where('ms_item.room_id', '=', $room_id)
         ->get();
 
-    return Excel::download(new ItemExport($data), 'Item-' . $roomName . '-' . Carbon::now()->timestamp . '.xlsx');
+    return Excel::download(new ItemExport($data), 'Item |' . $roomName . '|' . Carbon::now()->timestamp . '.xlsx');
 }
 
 

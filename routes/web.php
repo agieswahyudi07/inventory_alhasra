@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SesiController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InstitutionController;
@@ -38,6 +39,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['roleAcces:admin'], 'as' => 
 
     Route::get('/dashboard', [DashboardController::class, 'dashboard_admin'])->name('dashboard');
     Route::get('/logout', [SesiController::class, 'logout'])->name('logout');
+    Route::get('/register', [SesiController::class, 'register'])->name('register');
+    Route::get('/register', [SesiController::class, 'register_store'])->name('register.store');
 
     // Route Item Room Index
     Route::get('/item_room/{room_id}', [ItemController::class, 'item_room_admin'])->name('item.room');
@@ -85,6 +88,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['roleAcces:admin'], 'as' => 
     Route::get('/category/edit/{id}', [CategoryController::class, 'category_edit'])->name('category.edit');
     Route::put('/category/update/{id}', [CategoryController::class, 'category_update'])->name('category.update');
     Route::delete('/category/destroy/{id}', [CategoryController::class, 'category_destroy'])->name('category.destroy');
+
+    // Rotue User 
+    Route::get('/user', [UserController::class, 'user'])->name('user');
+    Route::get('/user/create', [UserController::class, 'user_create'])->name('user.create');
+    Route::post('/user/store', [UserController::class, 'user_store'])->name('user.store');
+    Route::get('/user/edit/{id}', [UserController::class, 'user_edit'])->name('user.edit');
+
+    Route::get('/user/export', [UserController::class, 'user_export'])->name('user.export');
+    Route::delete('/user/destroy/{id}', [UserController::class, 'user_destroy'])->name('user.destroy');
+
 
     // API
     Route::get('/api/rooms/{institutionId}', [RoomController::class, 'getRoomsByInstitution']);

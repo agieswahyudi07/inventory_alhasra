@@ -395,7 +395,7 @@
 
                     <li>
                         <a href="{{ route('admin.item') }}">
-                            <i class="bi bi-circle"></i><span>ITEM</span>
+                            <i class="bx bx-chalkboard"></i><span>ITEM</span>
                         </a>
                     </li>
                     {{-- <li>
@@ -405,12 +405,17 @@
             </li> --}}
                     <li>
                         <a href="{{ route('admin.room') }}">
-                            <i class="bi bi-circle"></i><span>ROOM</span>
+                            <i class="bx bx-home-alt"></i><span>ROOM</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.category') }}">
                             <i class="bi bi-circle"></i><span>CATEGORY</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.user') }}">
+                            <i class="bi bi-circle"></i><span>USER</span>
                         </a>
                     </li>
                 </ul>

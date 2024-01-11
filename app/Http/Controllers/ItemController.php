@@ -170,6 +170,7 @@ class ItemController extends Controller
         Session::flash('txtItemType', $request->txtItemType);
         Session::flash('txtItemQty', $request->txtItemQty);
         Session::flash('selInstitution', $request->selInstitution);
+        Session::flash('txtSerialNumber', $request->txtSerialNumber);
         $institution = DB::table('ms_institution')->where('institution_id', '=', $request->selInstitution)->first();
         if ($institution) {
             Session::flash('txtInstitution', $institution->institution_name);
@@ -210,6 +211,8 @@ class ItemController extends Controller
         $itemName = $request->input('txtItemName');
         $itemBrand = $request->input('txtItemBrand');
         $itemType = $request->input('txtItemType');
+        $serialNumber = $request->input('txtSerialNumber');
+        $notes = $request->input('txtNotes');
         $itemPrice = intval(str_replace(',', '',  $request->input('txtItemPrice')));
         $institution_id = intval($request->input('selInstitution'));
         $category_id = intval($request->input('selCategory'));
@@ -252,12 +255,13 @@ class ItemController extends Controller
                 'institution_id' => $institution_id,
                 'room_id' => $room_id,
                 'category_id' => $category_id,
+                'serial_number' => $serialNumber,
                 'purchase_date' => $purchase_date,
-                'notes' => $request->input('txtNotes'),
+                'notes' => $notes,
             ];
-
+            // dd($data);
             $insert = ItemModel::create($data);
-
+            // dd($insert);
             $sequenceNumber++;
         }
 
@@ -390,6 +394,7 @@ class ItemController extends Controller
         Session::flash('txtItemType', $request->txtItemType);
         Session::flash('txtItemName', $request->txtItemName);
         Session::flash('txtItemPrice', $request->txtItemPrice);
+        Session::flash('txtSerialNumber', $request->txtSerialNumber);
         Session::flash('notes', $request->notes);
 
         $request->validate([
@@ -405,6 +410,7 @@ class ItemController extends Controller
             'item_brand' => $request->input('txtItemBrand'),
             'item_type' => $request->input('txtItemType'),
             'item_price' => $request->input('txtItemPrice'),
+            'serial_number' => $request->input('txtSerialNumber'),
             'notes' => $request->input('txtNotes'),
         ];
 

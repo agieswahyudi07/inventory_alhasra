@@ -25,7 +25,7 @@
                                     Item</button>
                             </a>
 
-                            <a href="{{ route('item.export') }}">
+                            <a href="{{ route('admin.item.export') }}">
                                 <button type="button" class="btn btn-primary mb-3"><i class="ri ri-file-excel-2-line">
                                     </i> Export Excel
                                 </button>
@@ -63,13 +63,13 @@
                                             <td>{{ $item->category_name }}</td>
                                             <td>{{ $item->purchase_date }}</td>
                                             <td>
-                                                <a href="{{ route('item.edit', $item->item_id) }}">
+                                                <a href="{{ route('admin.item.edit', $item->item_id) }}">
                                                     <button type="button" class="btn btn-primary mb-3"><i
                                                             class="bi bi-pencil-square"></i> Edit</button>
                                                 </a>
 
                                                 <form style="display: inline" method="POST"
-                                                    action="{{ route('item.destroy', $item->item_id) }}">
+                                                    action="{{ route('admin.item.destroy', $item->item_id) }}">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="button"

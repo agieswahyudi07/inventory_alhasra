@@ -20,6 +20,7 @@ class ItemModel extends Model
         'item_brand',
         'item_type',
         'item_code',
+        'serial_number',
         'item_price',
         'item_qty',
         'institution_id',

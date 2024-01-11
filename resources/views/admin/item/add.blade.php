@@ -160,6 +160,14 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="txtSerialNumber" class="col-sm-2 col-form-label">Serial Number</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txtSerialNumber" name="txtSerialNumber"
+                                    value="{{ Session::get('txtSerialNumber') }}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="txtPurchaseDate" class="col-sm-2 col-form-label">Purchase Date</label>
                             <div class="col-sm-10">
                                 <input type="date" class="form-control" id="txtPurchaseDate" name="txtPurchaseDate"
@@ -219,7 +227,7 @@
             // Fungsi untuk mengisi pilihan Room berdasarkan Institution yang dipilih
             function populateRooms(institutionId) {
                 $.ajax({
-                    url: '/api/rooms/' +
+                    url: '/admin/api/rooms/' +
                         institutionId, // Ganti URL dengan endpoint yang sesuai untuk mendapatkan data Room berdasarkan Institution
                     type: 'GET',
                     dataType: 'json',

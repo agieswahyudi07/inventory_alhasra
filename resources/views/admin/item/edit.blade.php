@@ -55,93 +55,14 @@
                             </div>
                         </div>
 
-
-                        {{-- <div class="col-12">
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Institution</label>
-                    <div class="col-sm-10">
-
-                        <select class="form-select" aria-label="Default select example" id="selInstitution" name="selInstitution">
-                        @if (session()->has('txtInstitution'))
-                          <option value="{{ Session::get('selInstitution') }}">{{ Session::get('txtInstitution') }}</option>
-                          @foreach ($data[1] as $institution)
-                            <option value="{{ $institution->institution_id }}" {{ $data[0]->institution_id == $institution->institution_id ? 'selected' : '' }}>
-                                {{ $institution->institution_name }}
-                            </option>
-                          @endforeach
-                        @else
-                          @foreach ($data[1] as $institution)
-                            <option value="{{ $institution->institution_id }}" {{ $data[0]->institution_id == $institution->institution_id ? 'selected' : '' }}>
-                                {{ $institution->institution_name }}
-                            </option>
-                         @endforeach
-
-                        @endif                          
-                        </select>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                  <div class="row mb-3">
-                      <label class="col-sm-2 col-form-label">Room</label>
-                      <div class="col-sm-10">
-  
-                          <select class="form-select" aria-label="Default select example" id="selRoom" name="selRoom">
-                          @if (session()->has('txtInstitution'))
-                            <option value="{{ Session::get('selRoom') }}">{{ Session::get('txtRoom') }}</option>
-                            @foreach ($data[2] as $room)
-                              <option value="{{ $room->room_id }}" {{ $data[0]->room_id == $room->room_id ? 'selected' : '' }}>
-                                  {{ $room->room_name }}
-                              </option>
-                            @endforeach
-                          @else
-                            @foreach ($data[2] as $room)
-                              <option value="{{ $room->room_id }}" {{ $data[0]->room_id == $room->room_id ? 'selected' : '' }}>
-                                  {{ $room->room_name }}
-                              </option>
-                           @endforeach
-  
-                          @endif                          
-                          </select>
-                      </div>
-                      </div>
-                  </div>
-
-                  <div class="col-12">
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Category</label>
-                        <div class="col-sm-10">
-    
-                            <select class="form-select" aria-label="Default select example" id="selCategory" name="selCategory">
-                            @if (session()->has('txtInstitution'))
-                              <option value="{{ Session::get('selCategory') }}">{{ Session::get('txtCategory') }}</option>
-                              @foreach ($data[3] as $category)
-                                <option value="{{ $category->category_id }}" {{ $data[0]->category_id == $category->category_id ? 'selected' : '' }}>
-                                    {{ $category->category_name }}
-                                </option>
-                              @endforeach
-                            @else
-                              @foreach ($data[3] as $category)
-                                <option value="{{ $category->category_id }}" {{ $data[0]->category_id == $category->category_id ? 'selected' : '' }}>
-                                    {{ $category->category_name }}
-                                </option>
-                             @endforeach
-    
-                            @endif                          
-                            </select>
+                        <div class="row mb-3">
+                            <label for="txtSerialNumber" class="col-sm-2 col-form-label">Item Price</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txtSerialNumber" name="txtSerialNumber"
+                                    value="{{ session()->has('txtSerialNumber') ? Session::get('txtSerialNumber') : $data[0]->serial_number }}">
+                            </div>
                         </div>
-                        </div>
-                    </div> --}}
 
-                        {{-- <div class="col-12">
-                    <div class="row mb-3">
-                        <label for="inputDate" class="col-sm-2 col-form-label">Purchase Date</label>
-                        <div class="col-sm-10">
-                          <input type="date" class="form-control" id="txtPurchaseDate" name="txtPurchaseDate" value="{{ session()->has('txtPurchaseDate') ? Session::get('txtPurchaseDate') : $data[0]->purchase_date;  }}">
-                        </div>
-                      </div>
-                </div> --}}
                         <div class="row mb-3">
                             <label for="txtNotes" class="col-sm-2 col-form-label">Notes</label>
                             <div class="col-sm-10">

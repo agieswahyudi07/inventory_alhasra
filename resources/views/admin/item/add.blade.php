@@ -1,4 +1,4 @@
-@extends('layout/menu')
+@extends('admin/menu')
 @section('main')
     <main id="main" class="main">
 
@@ -19,7 +19,7 @@
                     <h5 class="card-title">{{ $data['title'] }}</h5>
                     @include('message/errors')
                     <!-- Vertical Form -->
-                    <form class="row g-3" method="POST" action="{{ route('item.store') }}">
+                    <form class="row g-3" method="POST" action="{{ route('admin.item.store') }}">
                         @csrf
 
                         <div class="row mb-3">

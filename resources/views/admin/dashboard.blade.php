@@ -1,4 +1,4 @@
-@extends('layout.menu')
+@extends('admin.menu')
 @section('main')
     <main id="main" class="main">
 

@@ -1,4 +1,4 @@
-@extends('layout/menu')
+@extends('admin/menu')
 @section('main')
     <main id="main" class="main">
 
@@ -24,22 +24,22 @@
 
                             @include('message/errors')
                             <p></p>
-                            <a href="{{ route('office.create') }}">
+                            <a href="{{ route('admin.office.create') }}">
                                 <button type="button" class="btn btn-success mb-3"><i class="bi bi-plus-circle"></i> Add
                                     Office</i></button>
                             </a>
 
-                            <a href="{{ route('class.create') }}">
+                            <a href="{{ route('admin.class.create') }}">
                                 <button type="button" class="btn btn-warning mb-3"><i class="bi bi-plus-circle"></i> Add
                                     Class</i></button>
                             </a>
 
-                            <a href="{{ route('facilities.create') }}">
+                            <a href="{{ route('admin.facilities.create') }}">
                                 <button type="button" class="btn btn-danger mb-3"><i class="bi bi-plus-circle"></i> Add
                                     Facilities</i></button>
                             </a>
 
-                            <a href="{{ route('room.export') }}">
+                            <a href="{{ route('admin.room.export') }}">
                                 <button type="button" class="btn btn-primary mb-3">
                                     <i class="ri ri-file-excel-2-line"></i> Export Excel
                                 </button>
@@ -71,13 +71,13 @@
                     @elseif ($room->room_type_id === 3)
                     <a href="{{ route('facilities.edit', $room->room_id) }}" > <button type="button" class="btn btn-primary mb-3"><i class="bi bi-pencil-square"></i></button></a>
                     @endif --}}
-                                                <a href="{{ route('room.edit', $room->room_id) }}">
-                                                    <a href="{{ route('room.edit', $room->room_id) }}"> <button
+                                                <a href="{{ route('admin.room.edit', $room->room_id) }}">
+                                                    <a href="{{ route('admin.room.edit', $room->room_id) }}"> <button
                                                             type="button" class="btn btn-primary mb-3"><i
                                                                 class="bi bi-pencil-square"></i> Edit</button></a>
                                                 </a>
                                                 <form style="display: inline" method="POST"
-                                                    action="{{ route('room.destroy', $room->room_id) }}">
+                                                    action="{{ route('admin.room.destroy', $room->room_id) }}">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="button"

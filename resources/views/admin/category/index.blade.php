@@ -1,9 +1,9 @@
-@extends('layout/menu')
+@extends('admin/menu')
 @section('main')
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Data {{ $data['title'] }}</h1>
+            <h1>{{ $data['title'] }}</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -16,82 +16,63 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
+
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Datatables</h5>
+                            <h5 class="card-title">{{ $data['title'] }}</h5>
                             @include('message/errors')
-                            <a href="{{ route('item.create') }}">
+                            <p></p>
+                            <a href="{{ route('admin.category.create') }}">
                                 <button type="button" class="btn btn-success mb-3"><i class="bi bi-plus-circle"></i> Add
-                                    Item</button>
+                                    Category</button>
                             </a>
-
-                            <a href="{{ route('item.export') }}">
-                                <button type="button" class="btn btn-primary mb-3"><i class="ri ri-file-excel-2-line">
-                                    </i> Export Excel
-                                </button>
-                            </a>
-
 
                             <!-- Table with stripped rows -->
                             <table class="table datatable table-striped">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Item Code</th>
-                                        <th scope="col">Item Name</th>
-                                        <th scope="col">Item Brand</th>
-                                        <th scope="col">Item Type</th>
-                                        <th scope="col">Item Price</th>
-                                        <th scope="col">Institution</th>
-                                        <th scope="col">Room</th>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">Purchase Date</th>
+                                        <th scope="col">NO</th>
+                                        <th scope="col">Category Name</th>
+                                        <th scope="col">Category Code</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data['items'] as $index => $item)
+                                    @foreach ($data['categories'] as $category)
                                         <tr>
-                                            <th scope="row">{{ $index + 1 }}</th>
-                                            <td>{{ $item->item_code }}</td>
-                                            <td>{{ $item->item_name }}</td>
-                                            <td>{{ $item->item_brand }}</td>
-                                            <td>{{ $item->item_type }}</td>
-                                            <td>{{ 'Rp ' . number_format($item->item_price, 0, ',', '.') }}</td>
-                                            <td>{{ $item->institution_name }}</td>
-                                            <td>{{ $item->room_name }}</td>
-                                            <td>{{ $item->category_name }}</td>
-                                            <td>{{ $item->purchase_date }}</td>
+                                            <th scope="row">{{ $loop->iteration }}</th>
+                                            <td>{{ $category->category_name }}</td>
+                                            <td>{{ $category->category_code }}</td>
                                             <td>
-                                                <a href="{{ route('item.edit', $item->item_id) }}">
+                                                <a href="{{ route('admin.category.edit', $category->category_id) }}">
                                                     <button type="button" class="btn btn-primary mb-3"><i
-                                                            class="bi bi-pencil-square"></i> Edit</button>
-                                                </a>
-
+                                                            class="bi bi-pencil-square"></i> Edit</button></a>
                                                 <form style="display: inline" method="POST"
-                                                    action="{{ route('item.destroy', $item->item_id) }}">
+                                                    action="{{ route('admin.category.destroy', $category->category_id) }}">
                                                     @csrf
-                                                    @method('delete')
+                                                    @method('DELETE')
                                                     <button type="button"
                                                         class="btn btn-xs btn-danger mb-3 btn-flat show-alert-delete-box">
-                                                        <i class="bi bi-trash"></i> Delete
+                                                        <i class="bi bi-trash"> Delete</i>
                                                     </button>
                                                 </form>
+
+
                                             </td>
                                         </tr>
                                     @endforeach
+
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
+
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-
     </main><!-- End #main -->
-
     <script>
         $(document).ready(function() {
             $('.show-alert-delete-box').on('click', function() {

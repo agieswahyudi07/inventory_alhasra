@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function dashboard_index()
+    public function dashboard_admin()
     {
         $item = DB::table('ms_item')->count();
         $technology = DB::table('ms_item')->where('category_id', '=', '1')->count();
@@ -39,7 +39,7 @@ class DashboardController extends Controller
             ->join('ms_room', 'ms_item.room_id', '=', 'ms_room.room_id')
             ->select('ms_item.*', 'ms_room.room_name')
             ->get();
-            
+
         $data1 = [
             'item' => $item,
             'technology' => $technology,
@@ -112,7 +112,110 @@ class DashboardController extends Controller
             'facilities' => $facilities,
         ];
 
-        return view('dashboard', compact('data1', 'data2'));
+        return view('admin/dashboard', compact('data1', 'data2'));
+    }
+
+    public function dashboard_user()
+    {
+        $item = DB::table('ms_item')->count();
+        $technology = DB::table('ms_item')->where('category_id', '=', '1')->count();
+        $furniture = DB::table('ms_item')->where('category_id', '=', '2')->count();
+        $stationary = DB::table('ms_item')->where('category_id', '=', '3')->count();
+        $clean = DB::table('ms_item')->where('category_id', '=', '4')->count();
+        $utility = DB::table('ms_item')->where('category_id', '=', '5')->count();
+
+
+        $institution = DB::table('ms_institution')->count();
+
+        $room = DB::table('ms_room')->count();
+        $office = DB::table('ms_room')->where('room_type_id', '=', '1')->count();
+        $class = DB::table('ms_room')->where('room_type_id', '=', '2')->count();
+        $facilities  = DB::table('ms_room')->where('room_type_id', '=', '3')->count();
+
+        $category = DB::table('ms_category')->count();
+        $totalAsset =  ItemModel::sum('item_price');
+        $totalAssetFormatted = "Rp " . number_format($totalAsset, 0, ',', '.');
+
+        $recentItems = ItemModel::orderBy('item_id', 'desc')->get();
+
+        $recentItems = ItemModel::orderBy('item_id', 'desc')
+            ->join('ms_room', 'ms_item.room_id', '=', 'ms_room.room_id')
+            ->select('ms_item.*', 'ms_room.room_name')
+            ->get();
+
+        $data1 = [
+            'item' => $item,
+            'technology' => $technology,
+            'stationary' => $stationary,
+            'institution' => $institution,
+            'clean' => $clean,
+            'utility' => $utility,
+
+            'room' => $room,
+            'office' => $office,
+            'class' => $class,
+            'facilities' => $facilities,
+
+            'category' => $category,
+            'total' => $totalAssetFormatted,
+            'recent' => $recentItems
+        ];
+
+        $room_yayasan = DB::table('ms_room')->where('institution_id', '=', '1')->where('room_type_id', '=', '1')->get();
+        $yayasan = [];
+        foreach ($room_yayasan as $yys) {
+            $yayasan[] = [
+                'room_id' => $yys->room_id,
+                'room_name' => $yys->room_name,
+            ];
+        }
+
+        $room_smp = DB::table('ms_room')->where('institution_id', '=', '2')->get();
+        $smp = [];
+        foreach ($room_smp as $mp) {
+            $smp[] = [
+                'room_id' => $mp->room_id,
+                'room_name' => $mp->room_name,
+            ];
+        }
+
+        $room_sma = DB::table('ms_room')->where('institution_id', '=', '3')->get();
+        $sma = [];
+        foreach ($room_sma as $ma) {
+            $sma[] = [
+                'room_id' => $ma->room_id,
+                'room_name' => $ma->room_name,
+            ];
+        }
+
+        $room_smk = DB::table('ms_room')->where('institution_id', '=', '4')->get();
+        $smk = [];
+        foreach ($room_smk as $mk) {
+            $smk[] = [
+                'room_id' => $mk->room_id,
+                'room_name' => $mk->room_name,
+            ];
+        }
+
+        $room_facilities = DB::table('ms_room')->where('room_type_id', '=', '3')->get();
+        $facilities = [];
+        foreach ($room_facilities as $fct) {
+            $facilities[] = [
+                'room_id' => $fct->room_id,
+                'room_name' => $fct->room_name,
+            ];
+        }
+        // dd($yayasan);
+
+        $data2 = [
+            'yayasan' => $yayasan,
+            'smp' => $smp,
+            'sma' => $sma,
+            'smk' => $smk,
+            'facilities' => $facilities,
+        ];
+
+        return view('user/dashboard', compact('data1', 'data2'));
     }
 
     public function room_index()

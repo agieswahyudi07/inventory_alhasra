@@ -20,13 +20,7 @@ class RoomController extends Controller
 {
 
 
-    /**
-     * Display the specified resource.
-     */
-
-
-
-    public function room_index()
+    public function room_admin()
     {
         $rooms = RoomModel::orderBy('room_id', 'asc')->get();
         $title = "Room";
@@ -42,13 +36,13 @@ class RoomController extends Controller
             'title' => $title
         ];
 
-        return view('room.index', compact('data'));
+        return view('admin.room.index', compact('data'));
     }
 
-
-    public function room_index_()
+    public function room_user()
     {
-        $rooms = RoomModel::orderBy('room_id', 'desc')->get();
+        $rooms = RoomModel::orderBy('room_id', 'asc')->get();
+        $title = "Room";
 
         foreach ($rooms as $room) {
             $institution = DB::table('ms_institution')->select('institution_name')->where('institution_id', $room->institution_id)->first();
@@ -56,9 +50,13 @@ class RoomController extends Controller
             $room->institution_name = $institution ? $institution->institution_name : null;
         }
 
-        return view('room.index', compact('rooms'));
-    }
+        $data = [
+            'rooms' => $rooms,
+            'title' => $title
+        ];
 
+        return view('user.room.index', compact('data'));
+    }
 
 
     /**
@@ -104,7 +102,7 @@ class RoomController extends Controller
             'floor' => $floor
         ];
 
-        return view('room.office.add', compact('data'));
+        return view('admin.room.office.add', compact('data'));
     }
 
     public function class_create()
@@ -136,7 +134,7 @@ class RoomController extends Controller
             'floor' => $floor
         ];
 
-        return view('room.class.add', compact('data'));
+        return view('admin.room.class.add', compact('data'));
     }
 
     public function facilities_create()
@@ -168,7 +166,7 @@ class RoomController extends Controller
             'floor' => $floor
         ];
 
-        return view('room.facilities.add', compact('data'));
+        return view('admin.room.facilities.add', compact('data'));
     }
 
 
@@ -225,7 +223,7 @@ class RoomController extends Controller
         RoomModel::create($data);
 
         Session::flash('success', 'Data successfully Inserted.');
-        return redirect()->route('room.index');
+        return redirect()->route('admin.room');
     }
 
     public function class_store(Request $request)
@@ -279,7 +277,7 @@ class RoomController extends Controller
         RoomModel::create($data);
 
         Session::flash('success', 'Data successfully Inserted.');
-        return redirect()->route('room.index');
+        return redirect()->route('admin.room');
     }
 
     public function facilities_store(Request $request)
@@ -333,7 +331,7 @@ class RoomController extends Controller
         RoomModel::create($data);
 
         Session::flash('success', 'Data successfully Inserted.');
-        return redirect()->route('room.index');
+        return redirect()->route('admin.room');
     }
 
     /**
@@ -361,7 +359,7 @@ class RoomController extends Controller
             'title' => $title
         ];
         // dd($data);
-        return view('room.edit', compact('data'));
+        return view('admin.room.edit', compact('data'));
     }
     // public function class_edit($id)
     // {
@@ -428,13 +426,13 @@ class RoomController extends Controller
             'room_name' => $request->input('txtRoomName'),
             'institution_id' => $request->input('selInstitution'),
         ];
-// dd($data);
+        // dd($data);
         $room->update($data);
         Session::flash('success', 'Data successfully updated.');
-        return redirect()->route('room.index');
+        return redirect()->route('admin.room');
     }
 
-    public function room_export() 
+    public function room_export()
     {
         $columns = [
             'ms_room.*', // Pilih semua kolom dari ms_item
@@ -446,7 +444,7 @@ class RoomController extends Controller
             ->join('tr_room_type', 'tr_room_type.room_type_id', '=', 'ms_room.room_type_id')
             ->get();
 
-        return Excel::download(new RoomExport($data), 'room-'.Carbon::now()->timestamp.'.xlsx');
+        return Excel::download(new RoomExport($data), 'room-' . Carbon::now()->timestamp . '.xlsx');
     }
 
     /**
@@ -457,7 +455,7 @@ class RoomController extends Controller
     {
         RoomModel::find($id)->delete();
         Session::flash('success', 'Data successfully deleted.');
-        return redirect()->route('room.index');
+        return redirect()->route('admin.room');
     }
 
     public function getRoomsByInstitution($institutionId)

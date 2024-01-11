@@ -22,7 +22,7 @@ class CategoryController extends Controller
 
 
 
-    public function category_index()
+    public function category_admin()
     {
         $categories = CategoryModel::orderBy('category_id', 'desc')->get();
         $title = "Category";
@@ -41,28 +41,32 @@ class CategoryController extends Controller
         ];
 
 
-        return view('category.index', compact('data'));
+        return view('admin.category.index', compact('data'));
     }
 
-
-    public function category_index_()
+    public function category_user()
     {
         $categories = CategoryModel::orderBy('category_id', 'desc')->get();
-
+        $title = "Category";
         foreach ($categories as $category) {
-            $institution = DB::table('ms_institution')->select('institution_name')->where('institution_id', $category->institution_id)->first();
 
-            $category->institution_name = $institution ? $institution->institution_name : null;
+            $institution = DB::table('ms_institution')->select('institution_name')->where('institution_id', $category->institution_id)->first();
+            $room = DB::table('ms_room')->select('room_name')->where('room_id', $category->room_id)->first();
+            $category = DB::table('ms_category')->select('category_name')->where('category_id', $category->category_id)->first();
+
+            $category->category_name = $category ? $category->category_name : null;
         }
 
-        return view('category.index', compact('categories'));
+        $data = [
+            'categories' => $categories,
+            'title' => $title
+        ];
+
+
+        return view('user.category.index', compact('data'));
     }
 
 
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function category_create()
     {
         $institution = InstitutionModel::all();
@@ -75,7 +79,7 @@ class CategoryController extends Controller
             'title' => $title
         ];
 
-        return view('category.add', compact('data'));
+        return view('admin.category.add', compact('data'));
     }
 
     /**
@@ -106,7 +110,7 @@ class CategoryController extends Controller
         CategoryModel::create($data);
 
         Session::flash('success', 'Data successfully Inserted.');
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category');
     }
 
     /**
@@ -128,7 +132,7 @@ class CategoryController extends Controller
             'category' => $category
         ];
 
-        return view('category.edit', compact('data'));
+        return view('admin.category.edit', compact('data'));
     }
 
     /**
@@ -160,7 +164,7 @@ class CategoryController extends Controller
         // $result = $CategoryModel->update($data);
         $category->update($data);
         Session::flash('success', 'Data successfully updated.');
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category');
     }
 
     /**
@@ -171,6 +175,6 @@ class CategoryController extends Controller
     {
         CategoryModel::where('category_id', '=', $id)->delete();
         Session::flash('success', 'Data successfully deleted.');
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category');
     }
 }

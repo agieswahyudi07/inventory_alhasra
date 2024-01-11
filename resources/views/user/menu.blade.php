@@ -228,51 +228,51 @@
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
                         data-bs-toggle="dropdown">
-                        <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                        <img src="{{ asset('assets/img/al-hasra.png') }}" alt="Profile" class="rounded-circle">
+                        <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6>Kevin Anderson</h6>
-                            <span>Web Designer</span>
+                            <h6>{{ Auth::user()->name }}</h6>
+                            <span>{{ Auth::user()->role }}</span>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
 
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-person"></i>
-                                <span>My Profile</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
+                        {{-- <li>
+                      <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                        <i class="bi bi-person"></i>
+                        <span>My Profile</span>
+                      </a>
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+        
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                        <i class="bi bi-gear"></i>
+                        <span>Account Settings</span>
+                      </a>
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+        
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                        <i class="bi bi-question-circle"></i>
+                        <span>Need Help?</span>
+                      </a>
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li> --}}
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-gear"></i>
-                                <span>Account Settings</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                                <i class="bi bi-question-circle"></i>
-                                <span>Need Help?</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('user.logout') }}">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
                             </a>
@@ -299,6 +299,20 @@
                 </a>
             </li><!-- End Dashboard Nav -->
 
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('user.item') }}">
+                    <i class="bx bx-chalkboard"></i>
+                    <span>ITEM</span>
+                </a>
+            </li><!-- End Item Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('user.room') }}">
+                    <i class="bx bx-home-alt"></i>
+                    <span>ROOM</span>
+                </a>
+            </li><!-- End Room Nav -->
+
 
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-toggle="collapse" href="#office-nav">
@@ -307,7 +321,7 @@
                 <ul id="office-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                     @foreach (app('data2')['yayasan'] as $yayasan)
                         <li>
-                            <a href="{{ route('item.room.index', ['room_id' => $yayasan['room_id']]) }}">
+                            <a href="{{ route('user.item.room', ['room_id' => $yayasan['room_id']]) }}">
                                 <i
                                     class="bi bi-circle"></i>{{ $yayasan['room_code'] . ' | ' . $yayasan['room_name'] }}<span></span>
                             </a>
@@ -326,7 +340,7 @@
                 <ul id="smk-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                     @foreach (app('data2')['smk'] as $smk)
                         <li>
-                            <a href="{{ route('item.room.index', ['room_id' => $smk['room_id']]) }}">
+                            <a href="{{ route('user.item.room', ['room_id' => $smk['room_id']]) }}">
                                 <i
                                     class="bi bi-circle"></i>{{ $smk['room_code'] . ' | ' . $smk['room_name'] }}<span></span>
                             </a>
@@ -342,7 +356,7 @@
                 <ul id="sma-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                     @foreach (app('data2')['sma'] as $sma)
                         <li>
-                            <a href="{{ route('item.room.index', ['room_id' => $sma['room_id']]) }}">
+                            <a href="{{ route('user.item.room', ['room_id' => $sma['room_id']]) }}">
                                 <i
                                     class="bi bi-circle"></i>{{ $sma['room_code'] . ' | ' . $sma['room_name'] }}<span></span>
                             </a>
@@ -358,7 +372,7 @@
                 <ul id="smp-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                     @foreach (app('data2')['smp'] as $smp)
                         <li>
-                            <a href="{{ route('item.room.index', ['room_id' => $smp['room_id']]) }}">
+                            <a href="{{ route('user.item.room', ['room_id' => $smp['room_id']]) }}">
                                 <i
                                     class="bi bi-circle"></i>{{ $smp['room_code'] . ' | ' . $smp['room_name'] }}<span></span>
                             </a>
@@ -377,7 +391,7 @@
                 <ul id="special-room-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                     @foreach (app('data2')['facilities'] as $fct)
                         <li>
-                            <a href="{{ route('item.room.index', ['room_id' => $fct['room_id']]) }}">
+                            <a href="{{ route('user.item.room', ['room_id' => $fct['room_id']]) }}">
                                 <i
                                     class="bi bi-circle"></i>{{ $fct['room_code'] . ' | ' . $fct['room_name'] }}<span></span>
                             </a>
@@ -385,40 +399,6 @@
                     @endforeach
                 </ul>
             </li>
-
-            <li class="nav-heading">SETTING</li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-toggle="collapse" href="#option-nav">
-                    <i class="bi bi-gear"></i><span>Option</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="option-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-
-                    <li>
-                        <a href="{{ route('item.index') }}">
-                            <i class="bi bi-circle"></i><span>ITEM</span>
-                        </a>
-                    </li>
-                    {{-- <li>
-              <a href="{{ route('institution.index') }}">
-                <i class="bi bi-circle"></i><span>INSTITUTION</span>
-              </a>
-            </li> --}}
-                    <li>
-                        <a href="{{ route('room.index') }}">
-                            <i class="bi bi-circle"></i><span>ROOM</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('category.index') }}">
-                            <i class="bi bi-circle"></i><span>CATEGORY</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <!-- End Forms Nav -->
-
-
-
         </ul>
 
     </aside><!-- End Sidebar-->

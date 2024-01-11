@@ -1,4 +1,4 @@
-@extends('layout/menu')
+@extends('admin/menu')
 @section('main')
     <main id="main" class="main">
 
@@ -19,7 +19,7 @@
                     <h5 class="card-title">Vertical Form</h5>
                     @include('message/errors')
                     <!-- Vertical Form -->
-                    <form class="row g-3" method="POST" action="{{ route('item.update', $data[0]->item_id) }}">
+                    <form class="row g-3" method="POST" action="{{ route('admin.item.update', $data[0]->item_id) }}">
                         @csrf
                         @method('PUT')
 
@@ -160,4 +160,48 @@
         </section>
 
     </main><!-- End #main -->
+
+
+    <script>
+        $(document).ready(function() {
+
+            // Fungsi untuk membuat input uppercase ketika diketikkan
+            $('input[type="text"]').on('input', function() {
+                $(this).val(function(_, val) {
+                    return val.toUpperCase();
+                });
+            });
+
+            // Fungsi untuk format angka menjadi format uang
+            function formatNumber(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+            function updatePriceInput(input) {
+                let value = input.value.replace(/[^\d.]/g, '');
+                value = value.replace(/(\..*)\./g, '$1');
+
+                let number = parseFloat(value);
+
+                if (!isNaN(number)) {
+                    let formattedNumber = formatNumber(number);
+                    input.value = formattedNumber;
+                } else {
+                    input.value = '';
+                }
+            }
+
+            // Panggil fungsi updatePriceInput saat input harga diisi
+            $('#txtNeedPrice').on('input', function() {
+                updatePriceInput(this);
+            });
+
+            // Panggil fungsi updatePriceInput saat input harga diisi
+            $('#txtNeedQty').on('input', function() {
+                updatePriceInput(this);
+            });
+
+
+        });
+    </script>
 @endsection

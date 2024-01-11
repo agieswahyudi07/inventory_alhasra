@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ItemController extends Controller
 {
-    public function item_index()
+    public function item_admin()
     {
         $items = ItemModel::orderBy('item_id', 'desc')->get();
 
@@ -39,10 +39,35 @@ class ItemController extends Controller
             'title' => $title,
         ];
 
-        return view('item.index', compact('data'));
+        return view('admin.item.index', compact('data'));
     }
 
-    public function item_room_index($id)
+    public function item_user()
+    {
+        $items = ItemModel::orderBy('item_id', 'desc')->get();
+
+        $title = "Item";
+
+        foreach ($items as $item) {
+
+            $institution = DB::table('ms_institution')->select('institution_name')->where('institution_id', $item->institution_id)->first();
+            $room = DB::table('ms_room')->select('room_name')->where('room_id', $item->room_id)->first();
+            $category = DB::table('ms_category')->select('category_name')->where('category_id', $item->category_id)->first();
+
+            $item->institution_name = $institution ? $institution->institution_name : null;
+            $item->room_name = $room ? $room->room_name : null;
+            $item->category_name = $category ? $category->category_name : null;
+        }
+
+        $data = [
+            'items' => $items,
+            'title' => $title,
+        ];
+
+        return view('user.item.index', compact('data'));
+    }
+
+    public function item_room_admin($id)
     {
 
 
@@ -77,7 +102,45 @@ class ItemController extends Controller
             'total_price' => $total_price_formated
         ];
 
-        return view('item.room.index', compact('data'));
+        return view('admin.item.room.index', compact('data'));
+    }
+
+    public function item_room_user($id)
+    {
+
+
+        $title = DB::table('ms_room')->where('room_id', '=', $id)->get();
+
+        $items = DB::table('ms_item')
+            ->where('room_id', $id)
+            ->orderBy('item_id', 'desc')
+            ->get();
+
+        $total_item = count($items);
+        $total_price = $items->sum('item_price');
+        $total_price_formated = "Rp " . number_format($total_price, 0, ',', '.');
+
+        foreach ($items as $item) {
+
+            $institution = DB::table('ms_institution')->select('institution_name')->where('institution_id', $item->institution_id)->first();
+            $room = DB::table('ms_room')->select('room_name')->where('room_id', $item->room_id)->first();
+            $category = DB::table('ms_category')->select('category_name')->where('category_id', $item->category_id)->first();
+
+            $item->institution_name = $institution ? $institution->institution_name : null;
+            $item->room_name = $room ? $room->room_name : null;
+            $item->category_name = $category ? $category->category_name : null;
+        }
+
+
+        $data = [
+
+            'title' => $title,
+            'items' => $items,
+            'total_item' => $total_item,
+            'total_price' => $total_price_formated
+        ];
+
+        return view('user.item.room.index', compact('data'));
     }
 
 
@@ -95,7 +158,7 @@ class ItemController extends Controller
             'title' => $title
         ];
 
-        return view('item.add', compact('data'));
+        return view('admin.item.add', compact('data'));
     }
 
     public function item_store(Request $request)
@@ -199,7 +262,7 @@ class ItemController extends Controller
         }
 
         Session::flash('success', 'Data successfully Inserted.');
-        return redirect()->route('item.index');
+        return redirect()->route('admin.item');
     }
 
     public function item_store_(Request $request)
@@ -299,7 +362,7 @@ class ItemController extends Controller
         }
 
         Session::flash('success', 'Data successfully Inserted.');
-        return redirect()->route('item.index');
+        return redirect()->route('admin.item');
     }
 
     public function item_edit($id)
@@ -311,7 +374,7 @@ class ItemController extends Controller
 
         $data = [$item, $institution, $room, $category];
 
-        return view('item.edit', compact('data'));
+        return view('admin.item.edit', compact('data'));
     }
 
     public function item_update(Request $request, $id)
@@ -319,7 +382,7 @@ class ItemController extends Controller
         $item = ItemModel::find($id);
         if (!$item) {
             Session::flash('error', 'Item not found.');
-            return redirect()->route('/item.index');
+            return redirect()->route('admin.item');
         }
 
         Session::flash('txtItemName', $request->txtItemName);
@@ -347,53 +410,53 @@ class ItemController extends Controller
 
         $item->update($data);
         Session::flash('success', 'Data successfully updated.');
-        return redirect()->route('item.index');
+        return redirect()->route('admin.item');
     }
 
 
-     public function item_export()
-{
-    $columns = [
-        'ms_item.*',
-        'ms_institution.institution_name',
-        'ms_room.room_name',
-        'ms_category.category_name',
-    ];
+    public function item_export()
+    {
+        $columns = [
+            'ms_item.*',
+            'ms_institution.institution_name',
+            'ms_room.room_name',
+            'ms_category.category_name',
+        ];
 
-    $data = ItemModel::select($columns)
-        ->join('ms_institution', 'ms_institution.institution_id', '=', 'ms_item.institution_id')
-        ->join('ms_room', 'ms_room.room_id', '=', 'ms_item.room_id')
-        ->join('ms_category', 'ms_category.category_id', '=', 'ms_item.category_id')
-        ->get();
+        $data = ItemModel::select($columns)
+            ->join('ms_institution', 'ms_institution.institution_id', '=', 'ms_item.institution_id')
+            ->join('ms_room', 'ms_room.room_id', '=', 'ms_item.room_id')
+            ->join('ms_category', 'ms_category.category_id', '=', 'ms_item.category_id')
+            ->get();
 
-    return Excel::download(new ItemExport($data), 'All_item |'.Carbon::now()->timestamp.'.xlsx');
-}
+        return Excel::download(new ItemExport($data), 'All_item |' . Carbon::now()->timestamp . '.xlsx');
+    }
 
-public function item_room_export($room_id)
-{
+    public function item_room_export($room_id)
+    {
 
-    $roomName = RoomModel::where('room_id', $room_id)->value('room_name');
+        $roomName = RoomModel::where('room_id', $room_id)->value('room_name');
 
-    $data = ItemModel::select([
+        $data = ItemModel::select([
             'ms_item.*',
             'ms_institution.institution_name AS institution_name',
             'ms_room.room_name AS room_name',
             'ms_category.category_name AS category_name',
         ])
-        ->join('ms_institution', 'ms_institution.institution_id', '=', 'ms_item.institution_id')
-        ->join('ms_room', 'ms_room.room_id', '=', 'ms_item.room_id')
-        ->join('ms_category', 'ms_category.category_id', '=', 'ms_item.category_id')
-        ->where('ms_item.room_id', '=', $room_id)
-        ->get();
+            ->join('ms_institution', 'ms_institution.institution_id', '=', 'ms_item.institution_id')
+            ->join('ms_room', 'ms_room.room_id', '=', 'ms_item.room_id')
+            ->join('ms_category', 'ms_category.category_id', '=', 'ms_item.category_id')
+            ->where('ms_item.room_id', '=', $room_id)
+            ->get();
 
-    return Excel::download(new ItemExport($data), 'Item |' . $roomName . '|' . Carbon::now()->timestamp . '.xlsx');
-}
+        return Excel::download(new ItemExport($data), 'Item |' . $roomName . '|' . Carbon::now()->timestamp . '.xlsx');
+    }
 
 
     public function item_destroy($id)
     {
         ItemModel::find($id)->delete();
         Session::flash('success', 'Data successfully deleted.');
-        return redirect()->route('item.index');
+        return redirect()->route('admin.item');
     }
 }

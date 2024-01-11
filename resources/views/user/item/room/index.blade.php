@@ -1,4 +1,4 @@
-@extends('layout/menu')
+@extends('user/menu')
 @section('main')
     <main id="main" class="main">
 
@@ -6,7 +6,7 @@
             <h1>Data Item</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('user.dashboard') }}">Home</a></li>
                     <li class="breadcrumb-item">Tables</li>
                     <li class="breadcrumb-item active">Data</li>
                     @foreach ($data['title'] as $title)
@@ -23,7 +23,7 @@
                     <div class="row">
                         <!-- Total Item Card -->
                         <div class="col-xxl-4 col-md-6 ">
-                            <div class="card info-card revenue-card border border-success">
+                            <div class="card info-card sales-card border border-success">
 
                                 <div class="card-body">
                                     <h5 class="card-title">Item <span>| Total</span></h5>
@@ -106,7 +106,7 @@
                             <p></p>
 
                             @foreach ($data['items'] as $item)
-                                <a href="{{ route('item.room.export', ['room_id' => $item->room_id]) }}">
+                                <a href="{{ route('admin.item.room.export', ['room_id' => $item->room_id]) }}">
                             @endforeach
                             <button type="button" class="btn btn-success mb-3">
                                 <i class="ri ri-file-excel-2-line"></i> Excel Export

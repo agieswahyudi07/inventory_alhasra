@@ -22,7 +22,7 @@
 
                     <div class="row">
                         <!-- Total Item Card -->
-                        <div class="col-xxl-4 col-md-6 ">
+                        <div class="col-xxl-6 col-md-6 ">
                             <div class="card info-card sales-card border border-success">
 
                                 <div class="card-body">
@@ -46,8 +46,8 @@
                         </div>
                         <!-- End Total Item Card -->
                         <!-- Total Price -->
-                        <div class="col-xxl-4 col-md-6 ">
-                            <div class="card info-card revenue-card border border-success">
+                        <div class="col-xxl-6 col-md-6 ">
+                            <div class="card info-card customers-card border border-warning">
 
                                 <div class="card-body">
                                     <h5 class="card-title">Price <span>| Total</span></h5>
@@ -55,7 +55,9 @@
                                     <div class="d-flex align-items-center">
                                         <div
                                             class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bx bx-chair"></i>
+                                            <i
+                                                class="bi bi-currency-dollar
+                                            "></i>
                                         </div>
                                         <div class="ps-3">
                                             <h6>{{ $data['total_price'] }}</h6>
@@ -69,30 +71,7 @@
                             </div>
                         </div>
                         <!-- End Total Price -->
-                        <!-- Furniture Card -->
-                        <div class="col-xxl-4 col-md-6 ">
-                            <div class="card info-card revenue-card border border-success">
 
-                                <div class="card-body">
-                                    <h5 class="card-title">Item <span>| Total</span></h5>
-
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bx bx-chair"></i>
-                                        </div>
-                                        <div class="ps-3">
-                                            <h6>-</h6>
-                                            <span class="text-success small pt-1 fw-bold">FURNITURE</span> <span
-                                                class="text-muted small pt-2 ps-1"></span>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- End Furniture Card -->
                     </div>
 
 

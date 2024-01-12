@@ -144,18 +144,28 @@
                                             <td>{{ $item->room_name }}</td>
                                             <td>{{ $item->category_name }}</td>
                                             <td>{{ $item->purchase_date }}</td>
-                                            {{-- <td>
-                    <a href="{{ route('item.edit',$item->item_id) }}">
-                      <button type="button" class="btn btn-primary mb-3"><i class="bi bi-pencil-square"></i></button>
-                    </a>
-                  <form style="display: inline" method="POST" action="{{ route('item.destroy',$item->item_id) }}">
-                      @csrf
-                      @method('delete')
-                      <button type="button" class="btn btn-xs btn-danger mb-3 btn-flat show-alert-delete-box">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                    </form>
-                  </td> --}}
+                                            <td>
+                                                <a href="{{ route('admin.item.room.show', $item->item_id) }}">
+                                                    <button type="button" class="btn btn-info mb-3"><i
+                                                            class="bi bi-eye"></i> Show</button>
+                                                </a>
+
+                                                <a href="{{ route('admin.item.room.edit', $item->item_id) }}">
+                                                    <button type="button" class="btn btn-primary mb-3"><i
+                                                            class="bi bi-pencil-square"></i> Edit</button>
+                                                </a>
+
+                                                <form style="display: inline" method="POST"
+                                                    action="{{ route('admin.item.room.destroy', ['item_id' => $item->item_id, 'room_id' => $item->room_id]) }}">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="button"
+                                                        class="btn btn-xs btn-danger mb-3 btn-flat show-alert-delete-box">
+                                                        <i class="bi bi-trash"></i> Delete
+                                                    </button>
+                                                </form>
+
+                                            </td>
                                         </tr>
                                     @endforeach
 

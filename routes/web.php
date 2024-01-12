@@ -21,7 +21,6 @@ use App\Http\Controllers\InstitutionController;
 |
 */
 
-
 Route::get('/', [SesiController::class, 'index'])->name('login')->middleware('guest');
 Route::get('/login', [SesiController::class, 'index'])->name('login.form')->middleware('guest');
 Route::post('/login', [SesiController::class, 'login'])->name('login.submit')->middleware('guest');
@@ -34,7 +33,6 @@ Route::get('/home', function () {
     }
 });
 
-
 Route::group(['prefix' => 'admin', 'middleware' => ['roleAcces:admin'], 'as' => 'admin.'], function () {
 
     Route::get('/dashboard', [DashboardController::class, 'dashboard_admin'])->name('dashboard');
@@ -44,7 +42,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['roleAcces:admin'], 'as' => 
 
     // Route Item Room Index
     Route::get('/item_room/{room_id}', [ItemController::class, 'item_room_admin'])->name('item.room');
+    Route::get('/item_room/edit/{id}', [ItemController::class, 'item_room_edit'])->name('item.room.edit');
+    Route::get('/item_room/show/{id}', [ItemController::class, 'item_room_show_admin'])->name('item.room.show');
+    Route::put('/item_room/update/{item_id}', [ItemController::class, 'item_room_update'])->name('item.room.update');
     Route::get('/item_room/export/{room_id}', [ItemController::class, 'item_room_export'])->name('item.room.export');
+    Route::delete('/item_room/destroy/{item_id}/{room_id}', [ItemController::class, 'item_room_destroy'])->name('item.room.destroy');
+
 
 
     // Route Item
@@ -55,6 +58,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['roleAcces:admin'], 'as' => 
     Route::put('/item/update/{id}', [ItemController::class, 'item_update'])->name('item.update');
     Route::get('/item/export/', [ItemController::class, 'item_export'])->name('item.export');
     Route::delete('/item/destroy/{id}', [ItemController::class, 'item_destroy'])->name('item.destroy');
+
+    // Route Item Detail 
+    Route::get('/item/show/{id}', [ItemController::class, 'item_show_admin'])->name('item.show');
 
     // Route Institution
     Route::get('/institution', [InstitutionController::class, 'institution_admin'])->name('institution.index');

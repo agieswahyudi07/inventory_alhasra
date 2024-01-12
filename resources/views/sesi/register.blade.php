@@ -65,6 +65,8 @@
                                         <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
                                         <p class="text-center small">Enter your personal details to create account</p>
                                     </div>
+                                    @include('message/errors')
+
 
                                     <form class="row g-3 needs-validation" method="POST"
                                         action="{{ route('admin.user.store') }}" novalidate>
@@ -89,6 +91,18 @@
                                                 id="yourPassword" required>
                                             <div class="invalid-feedback">Please enter your password!</div>
                                         </div>
+
+                                        <div class="col-12">
+                                            <label for="role" class="form-label">Role</label>
+                                            <select class="form-select" aria-label="Default select example"
+                                                id="role" name="role">
+                                                <option selected>Select role</option>
+                                                <option value="admin">Admin</option>
+                                                <option value="user">User</option>
+                                            </select>
+                                        </div>
+
+
 
                                         <div class="col-12">
                                             <button class="btn btn-primary w-100" type="submit">Create Account</button>

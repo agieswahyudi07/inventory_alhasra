@@ -33,21 +33,25 @@ class UserController extends Controller
         Session::flash('name', $request->name);
         Session::flash('email', $request->email);
         Session::flash('password', $request->password);
+        Session::flash('role', $request->role);
 
         $request->validate([
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
+            'role' => 'required|in:admin,user',
         ], [
-            'name.required' => 'Please Enter Your Name',
-            'email.required' => 'Please Enter Your Email',
-            'password.required' => 'Please Enter Your Password',
+            'name.required' => 'Please Enter Account Name',
+            'email.required' => 'Please Enter Account Email',
+            'password.required' => 'Please Enter Account Password',
+            'role.required' => 'Please select a role.',
+            'role.in' => 'Please select a role.',
         ]);
 
         $name = $request->input('name');
         $email = $request->input('email');
         $password = $request->input('password');
-        $role = "user";
+        $role = $request->input('role');
 
         $data = [
             'name' => $name,

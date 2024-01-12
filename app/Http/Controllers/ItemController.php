@@ -20,7 +20,6 @@ class ItemController extends Controller
     public function item_admin()
     {
         $items = ItemModel::orderBy('item_id', 'desc')->get();
-
         $title = "Item";
 
         foreach ($items as $item) {
@@ -67,10 +66,46 @@ class ItemController extends Controller
         return view('user.item.index', compact('data'));
     }
 
-    public function item_room_admin($id)
+    public function item_show_admin($id)
     {
 
+        $item = ItemModel::with('institution')
+            ->with('room')
+            ->with('category')
+            ->where('item_id', '=', $id)
+            ->first();
 
+        $title = "Item Details";
+
+        $data = [
+            'item'        => $item,
+            'title'       => $title,
+        ];
+        // dd($data);
+        return view('admin.item.show', compact('data'));
+    }
+
+    public function item_show_user($id)
+    {
+
+        $item = ItemModel::with('institution')
+            ->with('room')
+            ->with('category')
+            ->where('item_id', '=', $id)
+            ->first();
+
+        $title = "Item Details";
+
+        $data = [
+            'item'        => $item,
+            'title'       => $title,
+        ];
+        // dd($data);
+        return view('user.item.show', compact('data'));
+    }
+
+    public function item_room_admin($id)
+    {
         $title = DB::table('ms_room')->where('room_id', '=', $id)->get();
 
         $items = DB::table('ms_item')
@@ -143,6 +178,111 @@ class ItemController extends Controller
         return view('user.item.room.index', compact('data'));
     }
 
+    public function item_room_edit($id)
+    {
+
+        $item = DB::table('ms_item')->where('item_id', '=', $id)->first();
+        $institution = InstitutionModel::all();
+        $room = RoomModel::all();
+        $category = CategoryModel::all();
+
+        $data =
+            [
+                'item' =>  $item,
+                'institution' => $institution,
+                'room' => $room,
+                'category' => $category
+            ];
+
+        return view('admin.item.room.edit', compact('data'));
+    }
+
+    public function item_room_update(Request $request, $item_id)
+    {
+
+        $item = ItemModel::find($item_id);
+        if (!$item) {
+            Session::flash('error', 'Item not found.');
+            return redirect()->route('admin.item');
+        }
+
+        Session::flash('txtItemName', $request->txtItemName);
+        Session::flash('txtItemBrand', $request->txtItemBrand);
+        Session::flash('txtItemType', $request->txtItemType);
+        Session::flash('txtItemName', $request->txtItemName);
+        Session::flash('txtItemPrice', $request->txtItemPrice);
+        Session::flash('txtSerialNumber', $request->txtSerialNumber);
+        Session::flash('notes', $request->notes);
+        Session::flash('room_id', $request->room_id);
+
+        $request->validate([
+            'txtItemName' => 'required',
+            'txtItemPrice' => 'required',
+        ], [
+            'txtItemName.required' => 'Item Name Required.',
+            'txtItemPrice.required' => 'Item Price Required.',
+        ]);
+
+        $data = [
+            'item_name' => $request->input('txtItemName'),
+            'item_brand' => $request->input('txtItemBrand'),
+            'item_type' => $request->input('txtItemType'),
+            'item_price' => $request->input('txtItemPrice'),
+            'serial_number' => $request->input('txtSerialNumber'),
+            'notes' => $request->input('txtNotes'),
+        ];
+        $room_id = $request->input('room_id');
+
+        $item->update($data);
+
+        Session::flash('success', 'Data successfully updated.');
+        return redirect()->route('admin.item.room', $room_id);
+    }
+
+    public function item_room_show_admin($id)
+    {
+
+        $item = ItemModel::with('institution')
+            ->with('room')
+            ->with('category')
+            ->where('item_id', '=', $id)
+            ->first();
+
+        $title = "Item Details";
+
+        $data = [
+            'item'        => $item,
+            'title'       => $title,
+        ];
+        // dd($data);
+        return view('admin.item.room.show', compact('data'));
+    }
+
+    public function item_room_show_user($id)
+    {
+
+        $item = ItemModel::with('institution')
+            ->with('room')
+            ->with('category')
+            ->where('item_id', '=', $id)
+            ->first();
+
+        $title = "Item Details";
+
+        $data = [
+            'item'        => $item,
+            'title'       => $title,
+        ];
+        // dd($data);
+        return view('user.item.room.show', compact('data'));
+    }
+
+    public function item_room_destroy($item_id, $room_id)
+    {
+        ItemModel::find($item_id)->delete();
+        Session::flash('success', 'Data successfully deleted.');
+        return redirect()->route('admin.item.room', $room_id);
+    }
 
     public function item_create()
     {
@@ -262,106 +402,6 @@ class ItemController extends Controller
             // dd($data);
             $insert = ItemModel::create($data);
             // dd($insert);
-            $sequenceNumber++;
-        }
-
-        Session::flash('success', 'Data successfully Inserted.');
-        return redirect()->route('admin.item');
-    }
-
-    public function item_store_(Request $request)
-    {
-        $ItemModel = new ItemModel();
-        Session::flash('txtItemName', $request->txtItemName);
-        Session::flash('txtItemPrice', $request->txtItemPrice);
-        Session::flash('txtItemBrand', $request->txtItemBrand);
-        Session::flash('txtItemType', $request->txtItemType);
-        Session::flash('txtItemQty', $request->txtItemQty);
-        Session::flash('selInstitution', $request->selInstitution);
-        $institution = DB::table('ms_institution')->where('institution_id', '=', $request->selInstitution)->first();
-        if ($institution) {
-            Session::flash('txtInstitution', $institution->institution_name);
-        }
-        Session::flash('selRoom', $request->selRoom);
-        $room = DB::table('ms_room')->where('room_id', '=', $request->selRoom)->first();
-        if ($room) {
-            Session::flash('txtRoom', $room->room_name);
-        }
-        Session::flash('selCategory', $request->selCategory);
-        $category = DB::table('ms_category')->where('category_id', '=', $request->selCategory)->first();
-        if ($category) {
-            Session::flash('txtCategory', $category->category_name);
-        }
-        Session::flash('txtPurchaseDate', $request->txtPurchaseDate);
-        Session::flash('txtItemNotes', $request->txtItemNotes);
-
-        $request->validate([
-            'txtItemName' => 'required',
-            'txtItemPrice' => 'required',
-            'selInstitution' => 'integer',
-            'selRoom' => 'integer',
-            'selCategory' => 'integer',
-            // 'txtPurchaseDate' => 'required',
-        ], [
-            'txtItemName.required' => 'Item Name Required.',
-            'txtItemPrice.required' => 'Item Price Required.',
-            'selInstitution.integer' => 'Please Choose Item Institution.',
-            'selRoom.integer' => 'Please Choose the Item Room.',
-            'selCategory.integer' => 'Please Choose the Item Category.',
-            // 'txtPurchaseDate.required' => 'Please fill the Purchase Date.',
-        ]);
-
-        $itemQty = $request->input('txtItemQty');
-        $itemName = $request->input('txtItemName');
-        $itemBrand = $request->input('txtItemBrand');
-        $itemType = $request->input('txtItemType');
-        $itemPrice = intval(str_replace(',', '',  $request->input('txtItemPrice')));
-        $institution_id = intval($request->input('selInstitution'));
-        $category_id = intval($request->input('selCategory'));
-
-        $institution = InstitutionModel::find($request->input('selInstitution'));
-        $institutionCode = $institution->institution_code;
-        $room = RoomModel::find($request->input('selRoom'));
-        $roomCode = $room->room_code;
-
-        $purchase_date = $request->input('txtPurchaseDate');
-        if (!empty($purchase_date)) {
-            $purchase_date = $request->input('txtPurchaseDate');
-        } else {
-            $purchase_date = false;
-        }
-
-        $room_id = intval($request->input('selRoom'));
-
-
-        $lastItem = ItemModel::where('room_id', $room_id)
-            ->orderBy('item_id', 'desc')
-            ->first();
-
-        $sequenceNumber = $lastItem ? intval(substr($lastItem->item_code, -3)) + 1 : 1;
-        for ($i = 0; $i < $itemQty; $i++) {
-
-            $code = $this->itemCode($institutionCode, $roomCode, $purchase_date, $room_id, $sequenceNumber);
-
-            if ($purchase_date === false) {
-                $purchase_date = null;
-            }
-            $data = [
-                'item_name' => $itemName,
-                'item_brand' => $itemBrand,
-                'item_type' => $itemType,
-                'item_price' =>  $itemPrice,
-                'item_qty' =>  $itemQty,
-                'item_code' => $code,
-                'institution_id' => $institution_id,
-                'room_id' => $room_id,
-                'category_id' => $category_id,
-                'purchase_date' => $purchase_date,
-                'notes' => $request->input('txtNotes'),
-            ];
-
-            $insert = ItemModel::create($data);
-
             $sequenceNumber++;
         }
 

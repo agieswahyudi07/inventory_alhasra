@@ -58,6 +58,42 @@ class RoomController extends Controller
         return view('user.room.index', compact('data'));
     }
 
+    public function room_show_admin($id)
+    {
+
+        $room = RoomModel::with('institution')
+            ->with('type')
+            ->where('room_id', '=', $id)
+            ->first();
+
+        $title = "Item Details";
+
+        $data = [
+            'room'        => $room,
+            'title'       => $title,
+        ];
+        // dd($data);
+        return view('admin.room.show', compact('data'));
+    }
+
+    public function room_show_user($id)
+    {
+
+        $room = RoomModel::with('institution')
+            ->with('type')
+            ->where('room_id', '=', $id)
+            ->first();
+
+        $title = "Room Details";
+
+        $data = [
+            'room'        => $room,
+            'title'       => $title,
+        ];
+        // dd($data);
+        return view('user.room.show', compact('data'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

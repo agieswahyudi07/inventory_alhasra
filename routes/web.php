@@ -72,6 +72,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['roleAcces:admin'], 'as' => 
     Route::get('/room/edit/{id}', [RoomController::class, 'room_edit'])->name('room.edit');
     Route::put('/room/update/{id}', [RoomController::class, 'room_update'])->name('room.update');
     Route::get('/room/export/', [RoomController::class, 'room_export'])->name('room.export');
+    Route::get('/room/show/{id}', [RoomController::class, 'room_show_admin'])->name('room.show');
     Route::delete('/room/destroy/{id}', [RoomController::class, 'room_destroy'])->name('room.destroy');
 
     // Route Room ADD
@@ -117,6 +118,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['roleAcces:user'], 'as' => 'u
 
     // Route Item Room Index
     Route::get('/item_room/{room_id}', [ItemController::class, 'item_room_user'])->name('item.room');
+    Route::get('/item_room/show/{id}', [ItemController::class, 'item_room_show_user'])->name('item.room.show');
     Route::get('/item_room/export/{room_id}', [ItemController::class, 'item_room_export'])->name('item.room.export');
 
     // Route Item
@@ -124,6 +126,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['roleAcces:user'], 'as' => 'u
 
     // Route Room
     Route::get('/room', [RoomController::class, 'room_user'])->name('room');
+    Route::get('/room/show/{id}', [RoomController::class, 'room_show_user'])->name('room.show');
+
 
     // Route Category
     Route::get('/category', [CategoryController::class, 'category_user'])->name('category');

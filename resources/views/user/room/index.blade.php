@@ -43,10 +43,9 @@
                                             <td>{{ $room->room_code }}</td>
                                             <td>{{ $room->institution_name }}</td>
                                             <td>
-                                                <a href="#">
-                                                    <button type="button" class="btn btn-primary mb-3">
-                                                        <i class="bi bi-eye"></i> Show
-                                                    </button>
+                                                <a href="{{ route('user.room.show', $room->room_id) }}">
+                                                    <button type="button" class="btn btn-info mb-3"><i
+                                                            class="bi bi-eye"></i> Show</button>
                                                 </a>
                                             </td>
                                         </tr>

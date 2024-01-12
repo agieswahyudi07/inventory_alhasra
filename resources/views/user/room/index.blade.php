@@ -24,6 +24,12 @@
 
                             @include('message/errors')
 
+                            <a href="{{ route('user.room.export') }}">
+                                <button type="button" class="btn btn-primary mb-3">
+                                    <i class="ri ri-file-excel-2-line"></i> Export Excel
+                                </button>
+                            </a>
+
                             <!-- Table with stripped rows -->
                             <table class="table datatable table-striped ">
                                 <thead>

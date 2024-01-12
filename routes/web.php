@@ -23,7 +23,7 @@ use App\Http\Controllers\InstitutionController;
 
 Route::get('/', [SesiController::class, 'index'])->name('login')->middleware('guest');
 Route::get('/login', [SesiController::class, 'index'])->name('login.form')->middleware('guest');
-Route::post('/login', [SesiController::class, 'login'])->name('login.submit')->middleware('guest');
+Route::post('/', [SesiController::class, 'login'])->name('login.submit')->middleware('guest');
 
 Route::get('/home', function () {
     if (Auth::user()->role == 'admin') {
@@ -123,9 +123,15 @@ Route::group(['prefix' => 'user', 'middleware' => ['roleAcces:user'], 'as' => 'u
 
     // Route Item
     Route::get('/item', [ItemController::class, 'item_user'])->name('item');
+    Route::get('/item/export/', [ItemController::class, 'item_export'])->name('item.export');
+
+
+    // Route Item Detail 
+    Route::get('/item/show/{id}', [ItemController::class, 'item_show_user'])->name('item.show');
 
     // Route Room
     Route::get('/room', [RoomController::class, 'room_user'])->name('room');
+    Route::get('/room/export/', [RoomController::class, 'room_export'])->name('room.export');
     Route::get('/room/show/{id}', [RoomController::class, 'room_show_user'])->name('room.show');
 
 

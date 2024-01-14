@@ -33,7 +33,10 @@
                                     <strong>Type:</strong> {{ $data['item']->item_type }}<br>
                                 </p>
                                 <p class="card-text text-left">
-                                    <strong>Price:</strong> ${{ $data['item']->item_price }}<br>
+
+                                    <strong>Price:</strong>
+                                    {{ 'Rp ' . number_format($data['item']->item_price, 0, ',', '.') }}
+                                    <br>
                                 </p>
                                 <p class="card-text text-left">
                                     <strong>Quantity:</strong> {{ $data['item']->item_qty }}<br>

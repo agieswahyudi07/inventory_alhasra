@@ -10,17 +10,19 @@ class UserController extends Controller
 {
     public function user()
     {
-
-        $users = User::orderBy('id', 'asc')->get();
-        $title = "Users";
-        // dd($users);
-        $data = [
-            'users' => $users,
-            'title' => $title,
-        ];
-
-
-        return view('admin/user/user', compact('data'));
+        try {
+            $users = User::orderBy('id', 'asc')->get();
+            $title = "Users";
+            // dd($users);
+            $data = [
+                'users' => $users,
+                'title' => $title,
+            ];
+            return view('admin/user/user', compact('data'));
+        } catch (\Throwable $th) {
+            Session::flash($th->getMessage());
+            return redirect()->back()->withErrors($th->getMessage());
+        }
     }
 
     public function user_create()
@@ -30,36 +32,90 @@ class UserController extends Controller
 
     public function user_store(Request $request)
     {
-        Session::flash('name', $request->name);
-        Session::flash('email', $request->email);
-        Session::flash('password', $request->password);
+        try {            
+            Session::flash('name', $request->name);
+            Session::flash('email', $request->email);
+            Session::flash('password', $request->password);
+            Session::flash('role', $request->role);
+    
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required',
+                'password' => 'required',
+                'role' => 'required|in:admin,user',
+            ], [
+                'name.required' => 'Please Enter Account Name',
+                'email.required' => 'Please Enter Account Email',
+                'password.required' => 'Please Enter Account Password',
+                'role.required' => 'Please select a role.',
+                'role.in' => 'Please select a role.',
+            ]);
+    
+            $name = $request->input('name');
+            $email = $request->input('email');
+            $password = $request->input('password');
+            $role = $request->input('role');
+    
+            $data = [
+                'name' => $name,
+                'email' => $email,
+                'password' => $password,
+                'role' => $role,
+            ];
+            $insert = User::create($data);
 
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-        ], [
-            'name.required' => 'Please Enter Your Name',
-            'email.required' => 'Please Enter Your Email',
-            'password.required' => 'Please Enter Your Password',
-        ]);
+            return redirect()->route('admin.user');
+        } catch (\Throwable $th) {
+            Session::flash($th->getMessage());
+            return redirect()->back()->withErrors($th->getMessage());
+        }
+    }
 
-        $name = $request->input('name');
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $role = "user";
+    public function user_edit($id){
+        $data = User::where('id', $id)->first();
+        return view('sesi/edit', compact('data'));
+    }
 
-        $data = [
-            'name' => $name,
-            'email' => $email,
-            'password' => $password,
-            'role' => $role,
-        ];
-        // dd($data);
-        $insert = User::create($data);
-        // dd($insert);
+    public function user_update(Request $request, $id){
+    try {
+        $user = User::where('id', $id)->first();
+        if (!empty($user)) {
+            Session::flash('name', $request->name);
+            Session::flash('email', $request->email);
+            Session::flash('password', $request->password);
+            Session::flash('role', $request->role);
+            
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required|email',
+                'password' => 'required',
+                'role' => 'required',
+            ],[
+                'name.required' => 'Please Enter Account Name',
+                'email.required' => 'Please Enter Account Email',
+                'password.required' => 'Please Enter Account Password',
+                'role.required' => 'Please select a role.',
+            ]);
+    
+            $name = $request->input('name');
+            $email = $request->input('email');
+            $password = $request->input('password');
+            $role = $request->input('role');
 
+            $user->name = $name;
+            $user->email = $email;
+            $user->password = $password;
+            $user->role = $role;
+            $user->save();
 
-        return redirect()->route('admin.user');
+            return redirect()->route('admin.user');
+        }else {
+            Session::flash('user not found');
+            return redirect()->back()->withErrors('user not found');
+        }
+    } catch (\Throwable $th) {
+        Session::flash($th->getMessage());
+        return redirect()->back()->withErrors($th->getMessage());
+    }
     }
 }

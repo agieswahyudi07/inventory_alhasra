@@ -51,22 +51,28 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->role }}</td>
-                                            <td>
-                                                <a href="{{ route('admin.user.edit', $user->id) }}">
-                                                    <button type="button" class="btn btn-primary mb-3"><i
-                                                            class="bi bi-pencil-square"></i> Edit</button>
-                                                </a>
+                                            @if ($user->id == 1)
+                                                <td>
 
-                                                <form style="display: inline" method="POST"
-                                                    action="{{ route('admin.user.destroy', $user->id) }}">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="button"
-                                                        class="btn btn-xs btn-danger mb-3 btn-flat show-alert-delete-box">
-                                                        <i class="bi bi-trash"></i> Delete
-                                                    </button>
-                                                </form>
-                                            </td>
+                                                </td>
+                                            @else
+                                                <td>
+                                                    <a href="{{ route('admin.user.edit', $user->id) }}">
+                                                        <button type="button" class="btn btn-primary mb-3"><i
+                                                                class="bi bi-pencil-square"></i> Edit</button>
+                                                    </a>
+                                                    <form style="display: inline" method="POST"
+                                                        action="{{ route('admin.user.destroy', $user->id) }}">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="button"
+                                                            class="btn btn-xs btn-danger mb-3 btn-flat show-alert-delete-box">
+                                                            <i class="bi bi-trash"></i> Delete
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @endif
+
                                         </tr>
                                     @endforeach
                                 </tbody>

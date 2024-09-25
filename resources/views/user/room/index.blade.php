@@ -24,6 +24,12 @@
 
                             @include('message/errors')
 
+                            <a href="{{ route('user.room.export') }}">
+                                <button type="button" class="btn btn-primary mb-3">
+                                    <i class="ri ri-file-excel-2-line"></i> Export Excel
+                                </button>
+                            </a>
+
                             <!-- Table with stripped rows -->
                             <table class="table datatable table-striped ">
                                 <thead>
@@ -43,10 +49,9 @@
                                             <td>{{ $room->room_code }}</td>
                                             <td>{{ $room->institution_name }}</td>
                                             <td>
-                                                <a href="#">
-                                                    <button type="button" class="btn btn-primary mb-3">
-                                                        <i class="bi bi-eye"></i> Show
-                                                    </button>
+                                                <a href="{{ route('user.room.show', $room->room_id) }}">
+                                                    <button type="button" class="btn btn-info mb-3"><i
+                                                            class="bi bi-eye"></i> Show</button>
                                                 </a>
                                             </td>
                                         </tr>

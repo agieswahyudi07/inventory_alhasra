@@ -62,18 +62,20 @@
                                 <div class="card-body">
 
                                     <div class="pt-4 pb-2">
-                                        <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
-                                        <p class="text-center small">Enter your personal details to create account</p>
+                                        <h5 class="card-title text-center pb-0 fs-4">Edit an Account</h5>
+                                        <p class="text-center small">Enter your personal details to edit account</p>
                                     </div>
                                     @include('message/errors')
 
 
                                     <form class="row g-3 needs-validation" method="POST"
-                                        action="{{ route('admin.user.store') }}" novalidate>
+                                        action="{{ route('admin.user.update', $data->id) }}" novalidate>
                                         @csrf
+                                        @method('PUT')
                                         <div class="col-12">
                                             <label for="yourName" class="form-label">Name</label>
                                             <input type="text" name="name" class="form-control" id="yourName"
+                                                value="{{ session()->has('name') ? Session::get('name') : $data->name }}"
                                                 required>
                                             <div class="invalid-feedback">Please, enter your name!</div>
                                         </div>
@@ -81,13 +83,14 @@
                                         <div class="col-12">
                                             <label for="yourEmail" class="form-label">Email</label>
                                             <input type="email" name="email" class="form-control" id="yourEmail"
+                                                value="{{ session()->has('email') ? Session::get('email') : $data->email }}"
                                                 required>
                                             <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                                         </div>
 
                                         <div class="col-12">
                                             <label for="yourPassword" class="form-label">Password</label>
-                                            <input type="password" name="password" class="form-control"
+                                            <input type="password" name="password" class="form-control" value=""
                                                 id="yourPassword" required>
                                             <div class="invalid-feedback">Please enter your password!</div>
                                         </div>
@@ -97,15 +100,17 @@
                                             <select class="form-select" aria-label="Default select example"
                                                 id="role" name="role">
                                                 <option selected value="">Select role</option>
-                                                <option value="admin">Admin</option>
-                                                <option value="user">User</option>
+                                                <option value="admin" {{ $data->role == 'admin' ? 'selected' : '' }}>
+                                                    Admin</option>
+                                                <option value="user" {{ $data->role == 'user' ? 'selected' : '' }}>
+                                                    User</option>
                                             </select>
                                         </div>
 
 
 
                                         <div class="col-12">
-                                            <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                                            <button class="btn btn-primary w-100" type="submit">Update Account</button>
                                         </div>
                                     </form>
 

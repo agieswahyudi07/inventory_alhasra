@@ -19,22 +19,26 @@
                     <h5 class="card-title">Vertical Form</h5>
                     @include('message/errors')
                     <!-- Vertical Form -->
-                    <form class="row g-3" method="POST" action="{{ route('admin.category.store') }}">
+                    <form class="row g-3" method="POST" action="{{ route('admin.category.store') }}" id="formCategory"
+                        name="formCategory">
                         @csrf
                         <div class="col-12">
                             <label for="txtCategoryName" class="form-label">Category Name</label>
                             <input type="text" class="form-control" id="txtCategoryName" name="txtCategoryName"
                                 value="{{ Session::get('txtCategoryName') }}">
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="col-12">
                             <label for="txtCategoryCode" class="form-label">Category Code</label>
                             <input type="text" class="form-control" id="txtCategoryCode" name="txtCategoryCode"
                                 value="{{ Session::get('txtCategoryCode') }}">
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" id="submitCategory"
+                                name="submitCategory">Submit</button>
                         </div>
                     </form><!-- Vertical Form -->
 
@@ -52,6 +56,39 @@
                 $(this).val(function(_, val) {
                     return val.toUpperCase();
                 });
+            });
+
+            $('#formCategory').validate({
+                rules: {
+                    txtCategoryName: {
+                        required: true,
+                    },
+                    txtCategoryCode: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    txtCategoryName: {
+                        required: "Please enter category name.",
+                    },
+                    txtCategoryCode: {
+                        required: "Please enter category code.",
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    element.next('.invalid-feedback').html(error.html());
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid')
+                },
+                submitHandler: function(form) {
+                    $('#submitCategory').prop('disabled', true).val('Processing...');
+                    form.submit();
+                }
             });
         });
     </script>

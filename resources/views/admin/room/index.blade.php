@@ -64,13 +64,11 @@
                                             <td>{{ $room->room_code }}</td>
                                             <td>{{ $room->institution_name }}</td>
                                             <td>
-                                                {{-- @if ($room->room_type_id === 1)
-                    <a href="{{ route('office.edit', $room->room_id) }}" > <button type="button" class="btn btn-primary mb-3"><i class="bi bi-pencil-square"></i></button></a>
-                    @elseif ($room->room_type_id === 2)
-                    <a href="{{ route('class.edit', $room->room_id) }}" > <button type="button" class="btn btn-primary mb-3"><i class="bi bi-pencil-square"></i></button></a>
-                    @elseif ($room->room_type_id === 3)
-                    <a href="{{ route('facilities.edit', $room->room_id) }}" > <button type="button" class="btn btn-primary mb-3"><i class="bi bi-pencil-square"></i></button></a>
-                    @endif --}}
+                                                <a href="{{ route('admin.room.show', $room->room_id) }}">
+                                                    <button type="button" class="btn btn-info mb-3"><i
+                                                            class="bi bi-eye"></i> Show</button>
+                                                </a>
+
                                                 <a href="{{ route('admin.room.edit', $room->room_id) }}">
                                                     <a href="{{ route('admin.room.edit', $room->room_id) }}"> <button
                                                             type="button" class="btn btn-primary mb-3"><i

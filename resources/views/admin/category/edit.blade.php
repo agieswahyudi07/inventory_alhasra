@@ -20,23 +20,27 @@
                     @include('message/errors')
                     <!-- Vertical Form -->
                     <form class="row g-3" method="POST"
-                        action="{{ route('admin.category.update', $data['category']->category_id) }}">
+                        action="{{ route('admin.category.update', $data['category']->category_id) }}" id="formCategoryEdit"
+                        name="formCategoryEdit">
                         @csrf
                         @method('PUT')
                         <div class="col-12">
                             <label for="txtCategoryName" class="form-label">Category Name</label>
                             <input type="text" class="form-control" id="txtCategoryName" name="txtCategoryName"
                                 value="{{ session()->has('txtCategoryName') ? Session::get('txtCategoryName') : $data['category']->category_name }}">
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="col-12">
                             <label for="txtCategoryCode" class="form-label">Category Code</label>
                             <input type="text" class="form-control" id="txtCategoryCode" name="txtCategoryCode"
                                 value="{{ session()->has('txtCategoryCode') ? Session::get('txtCategoryCode') : $data['category']->category_code }}">
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" id="submitCategoryEdit"
+                                name="submitCategoryEdit">Submit</button>
                         </div>
                     </form><!-- Vertical Form -->
 
@@ -55,6 +59,39 @@
                 $(this).val(function(_, val) {
                     return val.toUpperCase();
                 });
+            });
+
+            $('#formCategoryEdit').validate({
+                rules: {
+                    txtCategoryName: {
+                        required: true,
+                    },
+                    txtCategoryCode: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    txtCategoryName: {
+                        required: "Please enter category name.",
+                    },
+                    txtCategoryCode: {
+                        required: "Please enter category code.",
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    element.next('.invalid-feedback').html(error.html());
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid')
+                },
+                submitHandler: function(form) {
+                    $('#submitCategoryEdit').prop('disabled', true).val('Processing...');
+                    form.submit();
+                }
             });
         });
     </script>

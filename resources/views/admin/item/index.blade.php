@@ -63,6 +63,11 @@
                                             <td>{{ $item->category_name }}</td>
                                             <td>{{ $item->purchase_date }}</td>
                                             <td>
+                                                <a href="{{ route('admin.item.show', $item->item_id) }}">
+                                                    <button type="button" class="btn btn-info mb-3"><i
+                                                            class="bi bi-eye"></i> Show</button>
+                                                </a>
+
                                                 <a href="{{ route('admin.item.edit', $item->item_id) }}">
                                                     <button type="button" class="btn btn-primary mb-3"><i
                                                             class="bi bi-pencil-square"></i> Edit</button>
@@ -88,12 +93,11 @@
                 </div>
             </div>
         </section>
-
-
     </main><!-- End #main -->
 
     <script>
         $(document).ready(function() {
+
             $('.show-alert-delete-box').on('click', function() {
                 var form = $(this).closest("form");
 

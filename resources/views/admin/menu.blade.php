@@ -13,6 +13,11 @@
     {{-- jquery --}}
     <script src="{{ asset('https://code.jquery.com/jquery-3.6.0.min.js') }}"></script>
 
+    <!-- jQuery Validation -->
+    <script src="{{ asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js') }}"></script>
+
+
 
     <!-- Favicons -->
     <link href="{{ asset('assets/img/al-hasra.png') }}" rel="icon">

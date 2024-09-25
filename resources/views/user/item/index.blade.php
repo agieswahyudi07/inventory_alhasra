@@ -20,7 +20,11 @@
                         <div class="card-body">
                             <h5 class="card-title">Datatables</h5>
                             @include('message/errors')
-
+                            <a href="{{ route('user.item.export') }}">
+                                <button type="button" class="btn btn-primary mb-3"><i class="ri ri-file-excel-2-line">
+                                    </i> Export Excel
+                                </button>
+                            </a>
                             <!-- Table with stripped rows -->
                             <table class="table datatable table-striped">
                                 <thead>
@@ -52,11 +56,10 @@
                                             <td>{{ $item->category_name }}</td>
                                             <td>{{ $item->purchase_date }}</td>
                                             <td>
-                                                <a href="#">
-                                                    <button type="button" class="btn btn-primary mb-3"><i
+                                                <a href="{{ route('user.item.show', $item->item_id) }}">
+                                                    <button type="button" class="btn btn-info mb-3"><i
                                                             class="bi bi-eye"></i> Show</button>
                                                 </a>
-
                                             </td>
                                         </tr>
                                     @endforeach

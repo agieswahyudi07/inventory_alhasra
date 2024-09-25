@@ -21,10 +21,9 @@ use App\Http\Controllers\InstitutionController;
 |
 */
 
-
 Route::get('/', [SesiController::class, 'index'])->name('login')->middleware('guest');
 Route::get('/login', [SesiController::class, 'index'])->name('login.form')->middleware('guest');
-Route::post('/login', [SesiController::class, 'login'])->name('login.submit')->middleware('guest');
+Route::post('/', [SesiController::class, 'login'])->name('login.submit')->middleware('guest');
 
 Route::get('/home', function () {
     if (Auth::user()->role == 'admin') {
@@ -33,7 +32,6 @@ Route::get('/home', function () {
         return redirect()->route('user.dashboard');
     }
 });
-
 
 Route::group(['prefix' => 'admin', 'middleware' => ['roleAcces:admin'], 'as' => 'admin.'], function () {
 
@@ -44,7 +42,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['roleAcces:admin'], 'as' => 
 
     // Route Item Room Index
     Route::get('/item_room/{room_id}', [ItemController::class, 'item_room_admin'])->name('item.room');
+    Route::get('/item_room/edit/{id}', [ItemController::class, 'item_room_edit'])->name('item.room.edit');
+    Route::get('/item_room/show/{id}', [ItemController::class, 'item_room_show_admin'])->name('item.room.show');
+    Route::put('/item_room/update/{item_id}', [ItemController::class, 'item_room_update'])->name('item.room.update');
     Route::get('/item_room/export/{room_id}', [ItemController::class, 'item_room_export'])->name('item.room.export');
+    Route::delete('/item_room/destroy/{item_id}/{room_id}', [ItemController::class, 'item_room_destroy'])->name('item.room.destroy');
+
 
 
     // Route Item
@@ -56,6 +59,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['roleAcces:admin'], 'as' => 
     Route::get('/item/export/', [ItemController::class, 'item_export'])->name('item.export');
     Route::delete('/item/destroy/{id}', [ItemController::class, 'item_destroy'])->name('item.destroy');
 
+    // Route Item Detail 
+    Route::get('/item/show/{id}', [ItemController::class, 'item_show_admin'])->name('item.show');
+
     // Route Institution
     Route::get('/institution', [InstitutionController::class, 'institution_admin'])->name('institution.index');
     Route::get('/institution/edit/{id}', [InstitutionController::class, 'institution_edit'])->name('institution.edit');
@@ -66,6 +72,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['roleAcces:admin'], 'as' => 
     Route::get('/room/edit/{id}', [RoomController::class, 'room_edit'])->name('room.edit');
     Route::put('/room/update/{id}', [RoomController::class, 'room_update'])->name('room.update');
     Route::get('/room/export/', [RoomController::class, 'room_export'])->name('room.export');
+    Route::get('/room/show/{id}', [RoomController::class, 'room_show_admin'])->name('room.show');
     Route::delete('/room/destroy/{id}', [RoomController::class, 'room_destroy'])->name('room.destroy');
 
     // Route Room ADD
@@ -82,7 +89,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['roleAcces:admin'], 'as' => 
     Route::get('/facilities/edit/{id}', [RoomController::class, 'facilities_edit'])->name('facilities.edit');
 
     // Route Category
-    Route::get('/category', [CategoryController::class, 'category_user'])->name('category');
+    Route::get('/category', [CategoryController::class, 'category_admin'])->name('category');
     Route::get('/category/create', [CategoryController::class, 'category_create'])->name('category.create');
     Route::post('/category/store', [CategoryController::class, 'category_store'])->name('category.store');
     Route::get('/category/edit/{id}', [CategoryController::class, 'category_edit'])->name('category.edit');
@@ -94,6 +101,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['roleAcces:admin'], 'as' => 
     Route::get('/user/create', [UserController::class, 'user_create'])->name('user.create');
     Route::post('/user/store', [UserController::class, 'user_store'])->name('user.store');
     Route::get('/user/edit/{id}', [UserController::class, 'user_edit'])->name('user.edit');
+    Route::put('/user/update/{id}', [UserController::class, 'user_update'])->name('user.update');
+
 
     Route::get('/user/export', [UserController::class, 'user_export'])->name('user.export');
     Route::delete('/user/destroy/{id}', [UserController::class, 'user_destroy'])->name('user.destroy');
@@ -111,13 +120,22 @@ Route::group(['prefix' => 'user', 'middleware' => ['roleAcces:user'], 'as' => 'u
 
     // Route Item Room Index
     Route::get('/item_room/{room_id}', [ItemController::class, 'item_room_user'])->name('item.room');
+    Route::get('/item_room/show/{id}', [ItemController::class, 'item_room_show_user'])->name('item.room.show');
     Route::get('/item_room/export/{room_id}', [ItemController::class, 'item_room_export'])->name('item.room.export');
 
     // Route Item
     Route::get('/item', [ItemController::class, 'item_user'])->name('item');
+    Route::get('/item/export/', [ItemController::class, 'item_export'])->name('item.export');
+
+
+    // Route Item Detail 
+    Route::get('/item/show/{id}', [ItemController::class, 'item_show_user'])->name('item.show');
 
     // Route Room
     Route::get('/room', [RoomController::class, 'room_user'])->name('room');
+    Route::get('/room/export/', [RoomController::class, 'room_export'])->name('room.export');
+    Route::get('/room/show/{id}', [RoomController::class, 'room_show_user'])->name('room.show');
+
 
     // Route Category
     Route::get('/category', [CategoryController::class, 'category_user'])->name('category');

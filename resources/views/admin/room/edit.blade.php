@@ -19,14 +19,15 @@
                     <h5 class="card-title">{{ $data['title'] }}</h5>
                     @include('message/errors')
                     <!-- Vertical Form -->
-                    <form class="row g-3" method="POST" action="{{ route('admin.room.update', $data['room']->room_id) }}">
+                    <form class="row g-3" method="POST" action="{{ route('admin.room.update', $data['room']->room_id) }}"
+                        id="formRoom" name="formRoom">
                         @csrf
                         @method('PUT')
                         <div class="col-12">
                             <label for="txtRoomName" class="form-label">Room Name</label>
                             <input type="text" class="form-control" id="txtRoomName" name="txtRoomName"
                                 value="{{ session()->has('txtRoomName') ? Session::get('txtRoomName') : $data['room']->room_name }}">
-
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="col-12" style="display: none">
@@ -54,12 +55,13 @@
                                             @endforeach
                                         @endif
                                     </select>
+                                    <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" id="submitRoom" name="submitRoom">Submit</button>
                         </div>
                     </form><!-- Vertical Form -->
 
@@ -77,6 +79,33 @@
                 $(this).val(function(_, val) {
                     return val.toUpperCase();
                 });
+            });
+
+            $('#formRoosm').validate({
+                rules: {
+                    txtRoomName: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    txtClassName: {
+                        required: "Please enter Room name.",
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    element.next('.invalid-feedback').html(error.html());
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid')
+                },
+                submitHandler: function(form) {
+                    $('#submitRoom').prop('disabled', true).val('Processing...');
+                    form.submit();
+                }
             });
         });
     </script>

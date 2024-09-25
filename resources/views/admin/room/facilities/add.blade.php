@@ -19,12 +19,14 @@
                     <h5 class="card-title">{{ $data['title'] }}</h5>
                     @include('message/errors')
                     <!-- Vertical Form -->
-                    <form class="row g-3" method="POST" action="{{ route('admin.facilities.store') }}">
+                    <form class="row g-3" method="POST" action="{{ route('admin.facilities.store') }}" id="formFacilities"
+                        name="formFacilities">
                         @csrf
                         <div class="col-12">
                             <label for="txtClassName" class="form-label">Room Name</label>
                             <input type="text" class="form-control" id="txtFacilitiesName" name="txtFacilitiesName"
                                 value="{{ Session::get('txtFacilitiesName') }}">
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="col-12">
@@ -41,13 +43,14 @@
                                                     {{ $institution->institution_name }}</option>
                                             @endforeach
                                         @else
-                                            <option selected>Open this select menu</option>
+                                            <option selected value="">Open this select menu</option>
                                             @foreach ($data['institutions'] as $institution)
                                                 <option value="{{ $institution->institution_id }}">
                                                     {{ $institution->institution_name }}</option>
                                             @endforeach
                                         @endif
                                     </select>
+                                    <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                         </div>
@@ -66,19 +69,20 @@
                                                 </option>
                                             @endforeach
                                         @else
-                                            <option selected>Open this select menu</option>
+                                            <option selected value="">Open this select menu</option>
                                             @foreach ($data['floor'] as $floor)
                                                 <option value="{{ $floor['floor_id'] }}">{{ $floor['floor_name'] }}
                                                 </option>
                                             @endforeach
                                         @endif
                                     </select>
+                                    <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submitFacilities" class="btn btn-primary" id="submitFacilities">Submit</button>
                         </div>
                     </form><!-- Vertical Form -->
 
@@ -95,6 +99,45 @@
                 $(this).val(function(_, val) {
                     return val.toUpperCase();
                 });
+            });
+
+            $('#formFacilities').validate({
+                rules: {
+                    txtFacilitiesName: {
+                        required: true,
+                    },
+                    selInstitution: {
+                        required: true,
+                    },
+                    selFloor: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    txtFacilitiesName: {
+                        required: "Please enter facilities name.",
+                    },
+                    selInstitution: {
+                        required: "Please choose institution.",
+                    },
+                    selFloor: {
+                        required: "Please choose floor.",
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    element.next('.invalid-feedback').html(error.html());
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid')
+                },
+                submitHandler: function(form) {
+                    $('#submitFacilitiess').prop('disabled', true).val('Processing...');
+                    form.submit();
+                }
             });
         });
     </script>

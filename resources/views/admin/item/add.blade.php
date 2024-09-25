@@ -19,7 +19,8 @@
                     <h5 class="card-title">{{ $data['title'] }}</h5>
                     @include('message/errors')
                     <!-- Vertical Form -->
-                    <form class="row g-3" method="POST" action="{{ route('admin.item.store') }}">
+                    <form class="row g-3" method="POST" action="{{ route('admin.item.store') }}" id="formItem"
+                        name="formItem">
                         @csrf
 
                         <div class="row mb-3">
@@ -27,6 +28,7 @@
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="txtItemName" name="txtItemName"
                                     value="{{ Session::get('txtItemName') }}">
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -35,6 +37,7 @@
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="txtItemBrand" name="txtItemBrand"
                                     value="{{ Session::get('txtItemBrand') }}">
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -43,6 +46,7 @@
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="txtItemType" name="txtItemType"
                                     value="{{ Session::get('txtItemType') }}">
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -51,6 +55,7 @@
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="txtItemPrice" name="txtItemPrice"
                                     value="{{ Session::get('txtItemPrice') }}">
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -71,6 +76,7 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -78,16 +84,18 @@
                             <label class="col-sm-2 col-form-label">Room</label>
                             <div class="col-sm-10">
                                 <select class="form-select" aria-label="Default select example" id="selRoom"
-                                    name="selRoom" disabled>
+                                    name="selRoom">
                                     @if (session()->has('txtRoom'))
                                         <option value="{{ Session::get('selRoom') }}">
                                             {{ Session::get('txtRoom') }}
                                         </option>
                                     @else
-                                        <option value="" selected disabled>Select Room</option>
+                                        <option value="">Select Room</option>
                                     @endif
                                     <!-- Pilihan Room akan diisi melalui JavaScript -->
                                 </select>
+                                <p class="pt-2">* choose institution first and room selection will shown</p>
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -148,7 +156,7 @@
                                             </option>
                                         @endforeach
                                     @else
-                                        <option selected>Open this select menu</option>
+                                        <option value="" selected>Select Category</option>
                                         @foreach ($data['category'] as $category)
                                             <option value="{{ $category->category_id }}">
                                                 {{ $category->category_code . '-' . $category->category_name }}
@@ -156,6 +164,7 @@
                                         @endforeach
                                     @endif
                                 </select>
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -164,6 +173,7 @@
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="txtSerialNumber" name="txtSerialNumber"
                                     value="{{ Session::get('txtSerialNumber') }}">
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -172,6 +182,7 @@
                             <div class="col-sm-10">
                                 <input type="date" class="form-control" id="txtPurchaseDate" name="txtPurchaseDate"
                                     value="{{ Session::get('txtPurchaseDate') }}">
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -212,7 +223,7 @@
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submitItem" class="btn btn-primary">Submit</button>
                         </div>
                     </form><!-- Vertical Form -->
 
@@ -257,6 +268,63 @@
                     }
                 });
             }
+
+            $('#formItem').validate({
+                rules: {
+                    txtItemName: {
+                        required: true,
+                    },
+                    txtItemPrice: {
+                        required: true,
+                    },
+                    selInstitution: {
+                        required: true,
+                    },
+                    selRoom: {
+                        required: true,
+                    },
+                    selCategory: {
+                        required: true,
+                    },
+                    txtPurchaseDate: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    txtItemName: {
+                        required: "Please enter item name.",
+                    },
+                    txtItemPrice: {
+                        required: "Please enter item price.",
+                    },
+                    selInstitution: {
+                        required: "Please choose institution.",
+                    },
+                    selRoom: {
+                        required: "Please choose room.",
+                    },
+                    selCategory: {
+                        required: "Please choose category.",
+                    },
+                    txtPurchaseDate: {
+                        required: "Please pick purchase date.",
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    element.next('.invalid-feedback').html(error.html());
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid')
+                },
+                submitHandler: function(form) {
+                    $('#submitItem').prop('disabled', true).val('Processing...');
+                    form.submit();
+                }
+            });
 
             // Panggil fungsi populateRooms saat pilihan Institution berubah
             $("#selInstitution").on("change", function() {

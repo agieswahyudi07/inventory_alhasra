@@ -30,6 +30,13 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
+    {{-- jquery --}}
+    <script src="{{ asset('https://code.jquery.com/jquery-3.6.0.min.js') }}"></script>
+    <!-- jQuery Validation -->
+    <script src="{{ asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js') }}"></script>
+
+
     <!-- =======================================================
   * Template Name: NiceAdmin
   * Updated: Mar 09 2023 with Bootstrap v5.2.3
@@ -60,21 +67,21 @@
                                 <div class="card-body">
 
                                     <div class="pt-4 pb-2">
-                                        <h5 class="card-title text-center pb-0 fs-4">QUICK RESPONSE</h5>
+                                        <h5 class="card-title text-center pb-0 fs-4">INVENTORY</h5>
                                         <p class="text-center small">Enter your username & password to login</p>
                                     </div>
                                     @include('message/errors')
 
                                     <form class="row g-3 needs-validation" method="POST"
-                                        action="{{ route('login.submit') }}">
+                                        action="{{ route('login.submit') }}" id="loginForm" name="loginForm">
                                         @csrf
                                         <div class="col-12">
                                             <label for="email" class="form-label">e-mail</label>
                                             <div class="input-group has-validation">
                                                 {{-- <span class="input-group-text" id="inputGroupPrepend">@</span> --}}
                                                 <input type="text" name="email" class="form-control" id="email"
-                                                    required value="{{ old('email', Session::get('email')) }}">
-                                                <div class="invalid-feedback">Please enter your email.</div>
+                                                    value="{{ old('email', Session::get('email')) }}" required>
+                                                <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
 
@@ -82,7 +89,7 @@
                                             <label for="password" class="form-label">Password</label>
                                             <input type="password" name="password" class="form-control" id="password"
                                                 required>
-                                            <div class="invalid-feedback">Please enter your password!</div>
+                                            <div class="invalid-feedback"></div>
                                         </div>
 
                                         {{-- <div class="col-12">
@@ -121,6 +128,46 @@
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#loginForm').validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true
+                    }
+                },
+                messages: {
+                    email: {
+                        required: "Please enter your email.",
+                        email: "Please enter a valid email address."
+                    },
+                    password: {
+                        required: "Please enter your password."
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    element.next('.invalid-feedback').html(error.html());
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid')
+                },
+                submitHandler: function(form) {
+                    $('#loginButton').prop('disabled', true).val('Processing...');
+                    form.submit();
+                }
+            });
+        });
+    </script>
 
     <!-- Vendor JS Files -->
     <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
